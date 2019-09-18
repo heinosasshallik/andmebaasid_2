@@ -1,23 +1,39 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Login from './views/Login.vue';
+import AllTables from './views/AllTables.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'login',
+      component: Login,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/all_tables',
+      name: 'all_tables',
+      component: AllTables,
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ['/'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('db-2-jwt');
+
+  // todo uncomment
+  // if (authRequired && !loggedIn) {
+  //   return next('/');
+  // }
+
+  next();
+});
+
+export default router;
+
+// https://jasonwatmore.com/post/2018/07/14/vue-vuex-user-registration-and-login-tutorial-example

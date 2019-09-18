@@ -1,8 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" v-if="this.$route.path !== '/'">
+
+      <b-navbar toggleable="lg" type="dark" variant="dark">
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item>
+              <router-link to="/all_tables" class="text-black">Vaata kõiki laudu</router-link>
+            </b-nav-item>
+            <b-nav-item>
+              <router-link to="/" class="text-black">Lõpeta laud</router-link>
+            </b-nav-item>
+            <b-nav-item>
+              <router-link to="/" class="text-black">Vaata laudade koondaruannet</router-link>
+            </b-nav-item>
+          </b-navbar-nav>
+
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item>
+              <router-link to="/" class="text-black">Logi välja</router-link>
+            </b-nav-item>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+
     </div>
     <router-view/>
   </div>
@@ -16,16 +39,8 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.text-black {
+  color: #6e6e6e;
 }
 </style>
