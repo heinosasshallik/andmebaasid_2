@@ -17,10 +17,13 @@ https://github.com/hugomd/go-todo
 If you're wondering how Go dependency management works (not necessary to read):
 https://medium.com/rungo/anatomy-of-modules-in-go-c8274d215c16
 
+Run with `go run main.go`
+
 ## Frontend
 
 Requires Vue CLI.
 Run `npm install` to download dependencies.
+Run `npm run serve` to serve frontend.
 
 ## Database
 
@@ -29,4 +32,4 @@ Start the developer database with `sudo run_developer_database.sh`
 Host: 127.0.0.1
 Username: postgres
 Password: postgres
-Database: andmebaasid
+Database: currently tasks, will be andmebaasid later.
