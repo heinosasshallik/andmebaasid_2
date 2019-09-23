@@ -2,14 +2,18 @@
 
 ## Project setup:
 
-Go (v1.13) setup (choose one):
-* https://golang.org/doc/install (or apt-get)
-* Update PATH (Go gets saved to /usr/local/go). In Linux, add this to .bashrc: `export PATH=/usr/local/go/bin:$PATH`
-* `cd frontend; npm install`
+Go (v1.13) setup:
+* https://golang.org/doc/install
+* Update the PATH. In Linux, add this to .bashrc: `export PATH=/usr/local/go/bin:$PATH`
+* `git clone https://github.com/heinosasshallik/andmebaasid_2.git`
+* `cd frontend; npm install; npm run build`
 
-`go get -v github.com/heinosasshallik/andmebaasid_2` 
+You can clone this project anywhere besides inside your $GOPATH.
+
+Deprecated:
+/*`go get -v github.com/heinosasshallik/andmebaasid_2` 
 It will get cloned to $GOPATH/go/src/github.com/heinosasshallik/andmebaasid_2
-
+*/
 ## API
 
 Based on this article (You might want to read it if you're starting off)
@@ -22,5 +26,6 @@ Packages:
 * database/sql for sql queries
 
 ## Frontend
+
 
 ## Database
