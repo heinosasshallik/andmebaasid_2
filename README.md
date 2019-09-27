@@ -5,6 +5,7 @@
 Go (v1.13) setup:
 * https://golang.org/doc/install
 * Update the PATH. In Linux, add this to .bashrc: `export PATH=/usr/local/go/bin:$PATH`
+* Update the PATH(2). Add the following folder to your path: $GOPATH/bin. In Linux, add this to .bashrc: `export PATH=~/go/bin:$PATH`
 * `git clone https://github.com/heinosasshallik/andmebaasid_2.git`
 
 You can clone this project anywhere besides inside your $GOPATH.
@@ -18,6 +19,13 @@ If you're wondering how Go dependency management works (not necessary to read):
 https://medium.com/rungo/anatomy-of-modules-in-go-c8274d215c16
 
 Run with `go run main.go`
+
+If you want it to autoreload when you make changes then do this:
+
+```
+go get github.com/codegangsta/gin
+gin run main.go
+```
 
 ## Frontend
 
