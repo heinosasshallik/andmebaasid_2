@@ -30,6 +30,7 @@ Run with `go run main.go`
 If you want it to autoreload when you make changes:
 ```
 go get github.com/pilu/fresh
+cd api/
 fresh
 ```
 
