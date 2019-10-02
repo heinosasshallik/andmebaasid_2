@@ -1,33 +1,41 @@
 package config
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
-
-	"github.com/tkanos/gonfig"
+	"os"
 )
 
 type databaseConfiguration struct {
-	user     string
-	password string
-	host     string
-	port     string
-	database string
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Host     string `json:"host"`
+	Port     string `json:"port"`
+	Database string `json:"database"`
 }
 
-type Configuration struct {
-	db databaseConfiguration
+type configuration struct {
+	Database databaseConfiguration `json:"db"`
 }
 
-var configuration Configuration
+var conf configuration
 
+// Init : Parse the configuration file
 func Init() {
-	configuration = Configuration{}
-	err := gonfig.GetConf("config/development.json", &configuration)
+	conf = configuration{}
+	jsonFile, err := os.Open("config/development.json")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
+	defer jsonFile.Close()
+
+	// Before unmarshalling we have to convert to byte value
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	json.Unmarshal(byteValue, &conf)
 }
 
-func GetConfiguration() Configuration {
-	return configuration
+func GetConfiguration() configuration {
+	return conf
 }

@@ -12,8 +12,8 @@ import (
 func main() {
 	log.Println("Starting server..")
 
-	db.Init()
 	config.Init()
+	db.Init()
 
 	router := gin.Default()
 

@@ -27,10 +27,10 @@ https://github.com/hugomd/go-todo
 
 Run with `go run main.go`
 
-If you want it to autoreload when you make changes then I think you can use gin (but I havent understood it yet):
+If you want it to autoreload when you make changes:
 ```
-go get github.com/codegangsta/gin
-gin run main.go
+go get github.com/pilu/fresh
+fresh
 ```
 
 Using this library for migrations:

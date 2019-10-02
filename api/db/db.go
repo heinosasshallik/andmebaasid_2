@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/heinosasshallik/andmebaasid_2/api/config"
 	_ "github.com/lib/pq"
 )
 
@@ -14,11 +15,12 @@ var err error
 // Init creates a connection to postgres database and
 // migrates any new models
 func Init() {
-	user := "postgres"
-	password := "postgres"
-	host := "127.0.0.1"
-	port := "5432"
-	database := "andmebaasid"
+	config := config.GetConfiguration()
+	user := config.Database.User
+	password := config.Database.Password
+	host := config.Database.Host
+	port := config.Database.Port
+	database := config.Database.Database
 
 	dbinfo := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable",
 		user,

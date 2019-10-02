@@ -1,5 +1,6 @@
 node_modules
 gin-bin
+api/tmp
 
 # Binaries for programs and plugins
 *.exe
