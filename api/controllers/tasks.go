@@ -21,7 +21,7 @@ func CreateTask(c *gin.Context) {
   var db = db.GetDB()
 
   if err := c.BindJSON(&task); err != nil {
-    c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+    c.AbortWithStatusJSON(http.StatusBadRequest, gin.H {
       "error": err.Error(),
     })
     return

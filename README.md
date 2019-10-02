@@ -12,11 +12,14 @@ You can clone this project anywhere besides inside your $GOPATH.
 
 ## API
 
+Learn Go from here:
+https://tour.golang.org/basics/1
+
+We use Go modules for dependency management (not necessary to read):
+https://medium.com/rungo/anatomy-of-modules-in-go-c8274d215c16
+
 Based on this example project:
 https://github.com/hugomd/go-todo
-
-If you're wondering how Go dependency management works (not necessary to read):
-https://medium.com/rungo/anatomy-of-modules-in-go-c8274d215c16
 
 Run with `go run main.go`
 
