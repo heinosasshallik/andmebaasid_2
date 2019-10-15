@@ -20,4 +20,4 @@ CREATE VIEW laua_detailid AS
   USING (laua_seisundi_liik_kood);
 
 
-COMMENT ON VIEW laua_detailid IS 'Laudade detailne ylevaade'
+COMMENT ON VIEW laua_detailid IS 'Annab detailse ülevaate laua andmete, seisundi ning laua registreerija kohta.'
