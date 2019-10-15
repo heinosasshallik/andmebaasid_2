@@ -6,4 +6,4 @@ CREATE VIEW ootel_mitteaktiivsed_lauad AS
   FROM Laua_seisundi_liik AS LSS INNER JOIN Laud AS L ON LSS.laua_seisundi_liik_kood = L.laua_seisundi_liik_kood
   WHERE (((L.laua_seisundi_liik_kood) In (2,3)));
 
-COMMENT ON VIEW ootel_mitteaktiivsed_lauad IS 'Ootel või mitteaktiivsete laudade nimekiri'
+COMMENT ON VIEW ootel_mitteaktiivsed_lauad IS 'Ootel voi mitteaktiivsete laudade nimekiri'
