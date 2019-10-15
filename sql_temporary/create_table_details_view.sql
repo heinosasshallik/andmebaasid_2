@@ -9,15 +9,15 @@ CREATE VIEW laua_detailid AS
     Laud.kommentaar,
     Laua_seisundi_liik.nimetus AS staatus,
     Laua_brand.nimetus AS brand,
-    Isik.eesnimi || ' ' || Isik.perenimi AS isiku_nimi,
+    COALESCE(Isik.eesnimi || ' ', '') || COALESCE(Isik.perenimi, '') AS isiku_nimi,
     Isik.e_meil AS isiku_e_meil
   FROM
     Laua_seisundi_liik
   INNER JOIN (Laua_brand 
     INNER JOIN (Isik 
       INNER JOIN Laud ON Isik.isik_id = Laud.registreerija_id)
-    ON Laua_brand.laua_brand_kood = Laud.laua_brand_kood)
-  ON Laua_seisundi_liik.laua_seisundi_liik_kood = Laud.laua_seisundi_liik_kood;
+    USING (laua_brand_kood))
+  USING (laua_seisundi_liik_kood);
 
 
 COMMENT ON VIEW laua_detailid IS 'Laudade detailne ylevaade'
