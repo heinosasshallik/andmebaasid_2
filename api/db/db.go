@@ -39,7 +39,6 @@ func Init() {
 	if err != nil {
 		log.Fatal("Error: Could not establish a connection with the database")
 	}
-
 }
 
 func GetDB() *sql.DB {

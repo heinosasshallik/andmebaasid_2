@@ -9,10 +9,9 @@ Go (v1.13) setup:
 * https://golang.org/doc/install
 * Update the PATH. In Linux, add this to .bashrc: `export PATH=/usr/local/go/bin:$PATH`
 * Update the PATH(2). Add the following folder to your path: $GOPATH/bin. In Linux, add this to .bashrc: `export PATH=~/go/bin:$PATH`
-* Download the project to your preferred location: `git clone https://github.com/heinosasshallik/andmebaasid_2.git`
 * Install our database migration program: `go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate`
 
-You can clone this project anywhere besides inside your $GOPATH.
+Download the project to your preferred location (anywhere besides inside your $GOPATH): `git clone https://github.com/heinosasshallik/andmebaasid_2.git`
 
 ## API
 
@@ -27,7 +26,7 @@ https://github.com/hugomd/go-todo
 
 Run with `go run main.go`
 
-If you want it to autoreload when you make changes:
+If you want it to autoreload when you make changes (requires you to have $GOPATH/bin in your PATH):
 ```
 go get github.com/pilu/fresh
 cd api/
@@ -39,7 +38,8 @@ https://github.com/golang-migrate/migrate
 
 ## Frontend
 
-Requires Vue CLI.
+Requires you to install Vue CLI. `npm install -g @vue/cli`
+
 Run `npm install` to download dependencies.
 Run `npm run serve` to serve frontend.
 
