@@ -42,3 +42,26 @@ $$;
 COMMENT ON PROCEDURE deaktiveeri_laud(aktiveeritava_laua_kood INT) IS 'Muudab laua oleku seisundi mitteaktiivseks (OP4).';
 
 
+/*
+Laua lõpetmaine.
+
+Laused testimiseks:
+select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
+call lopeta_laud(4);
+select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 4
+*/
+DROP PROCEDURE IF EXISTS lopeta_laud;
+CREATE OR REPLACE PROCEDURE lopeta_laud(lopetatava_laua_kood INT)
+LANGUAGE plpgsql    
+AS $$
+BEGIN
+    UPDATE laud 
+    SET laua_seisundi_liik_kood = 4
+    WHERE laua_kood = lopetatava_laua_kood AND laua_seisundi_liik_kood <> 1;
+    COMMIT;
+END;
+$$;
+
+COMMENT ON PROCEDURE lopeta_laud(lopetatava_laua_kood INT) IS 'Muudab laua oleku seisundi lopetatuks (OP5).';
+
+
