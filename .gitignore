@@ -3,3 +3,4 @@ node_modules
 gin-bin
 api/tmp
 api/config/apex.json
+.idea
