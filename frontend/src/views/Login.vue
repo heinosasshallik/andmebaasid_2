@@ -39,6 +39,7 @@
 </template>
 
 <script>
+  //todo: hmm, typescript?
     export default {
         data() {
             return {
@@ -56,7 +57,7 @@
                 if (true) { // todo: check response and enter here if auth successful
                     this.$router.push({ path: 'all_tables'});
                 } else {
-                    console.log('oopsie'); // todo: error handling or smth
+                    console.log('whoopsie'); // todo: error handling or smth
                 }
             },
             onReset(evt) {
