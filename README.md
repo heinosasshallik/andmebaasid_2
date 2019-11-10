@@ -45,7 +45,27 @@ Run `npm run serve` to serve frontend.
 
 ## Database
 
-Start the developer database with `sudo run_developer_database.sh`
+
+You have to run this before running the migrations. Switch t999... for your username and 'secret' for your password.
+
+```
+CREATE EXTENSION IF NOT EXISTS postgres_fdw;       
+
+CREATE SERVER minu_testandmete_server_apex FOREIGN DATA WRAPPER
+postgres_fdw OPTIONS (host 'apex.ttu.ee', dbname 'testandmed',
+port '5432');
+
+
+CREATE USER MAPPING FOR t990999 SERVER
+minu_testandmete_server_apex OPTIONS (user 't990999', password
+'secret');
+
+CREATE FOREIGN TABLE Riik_jsonb (
+riik JSONB )
+SERVER minu_testandmete_server_apex;
+```
+
+Start the developer database with `sudo run_developer_database.sh`. Though I think we're going to use apex.ttu.ee instead.
 
 Host: 127.0.0.1
 Username: postgres

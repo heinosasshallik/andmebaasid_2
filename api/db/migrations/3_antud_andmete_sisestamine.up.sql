@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS postgres_fdw;
+
 INSERT INTO Riik (riik_kood, nimetus) 
 SELECT riik->>'Alpha-3 code' AS riik_kood,
 riik->>'English short name lower case' AS nimetus 

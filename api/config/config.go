@@ -20,11 +20,12 @@ type configuration struct {
 }
 
 var conf configuration
+var configFile = "config/apex.json"
 
 // Init : Parse the configuration file
 func Init() {
 	conf = configuration{}
-	jsonFile, err := os.Open("config/development.json")
+	jsonFile, err := os.Open(configFile)
 	if err != nil {
 		log.Println(err)
 	}

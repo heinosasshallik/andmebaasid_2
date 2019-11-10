@@ -1,0 +1,9 @@
+{
+  "db": {
+    "user": "t123456",
+    "password": "",
+    "host": "apex.ttu.ee",
+    "port": "5432",
+    "database": "t123456"
+  }
+}
