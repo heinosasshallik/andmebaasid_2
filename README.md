@@ -45,8 +45,19 @@ Run `npm run serve` to serve frontend.
 
 ## Database
 
+### Connecting to the database from outside the university network
 
-You have to run this before running the migrations. Switch t999... for your username and 'secret' for your password.
+Have to port forward it. Replace my uniid with yours. You don't have to use pgcli to connect, you can use any client you want.
+
+```
+ssh -L 5432:localhost:5432 t179636@apex.ttu.ee
+pgcli -h localhost --username t179636 --password
+```
+
+
+### Database setup
+
+In apex, you have to run this before running the migrations. Switch t179636 for your username and 'secret' for your password. 
 
 ```
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;       
@@ -56,27 +67,37 @@ postgres_fdw OPTIONS (host 'apex.ttu.ee', dbname 'testandmed',
 port '5432');
 
 
-CREATE USER MAPPING FOR t990999 SERVER
-minu_testandmete_server_apex OPTIONS (user 't990999', password
+CREATE USER MAPPING FOR t179636 SERVER
+minu_testandmete_server_apex OPTIONS (user 't179636', password
 'secret');
 
 CREATE FOREIGN TABLE Riik_jsonb (
 riik JSONB )
 SERVER minu_testandmete_server_apex;
+
+CREATE FOREIGN TABLE Isik_jsonb (
+isik JSONB )
+SERVER minu_testandmete_server_apex;
 ```
 
-Start the developer database with `sudo run_developer_database.sh`. Though I think we're going to use apex.ttu.ee instead.
+### DEPRECATED, WE ARE USING APEX DATABASE
+
+Start the developer database with `sudo run_developer_database.sh`.
 
 Host: 127.0.0.1
 Username: postgres
 Password: postgres
 Database: andmebaasid
 
+### Creating new migrations
+
 You can create new migrations either manually or with (has to be run in api/ folder):
 `migrate create -ext sql -dir db/migrations -seq MIGRATION_NAME_HERE`
 
 Running new database migrations:
-1) use run_developer_database.sh
-2) use the following command (POSTGRESQL_URL example in run_developer_database.sh):
-`migrate -database ${POSTGRESQL_URL} -path db/migrations up`
 
+`migrate -database postgres://USERNAME:PASSWORD@IP_ADDRESS:5432/TABLE_NAME?sslmode=disable -path db/migrations up`
+
+Forcing the migration to a specific version. Fixed the "dirty" state. I don't think it actually makes any changes. Useful if a migration went wrong.
+
+`migrate -database postgres://USERNAME:PASSWORD@IP_ADDRESS:5432/TABLE_NAME?sslmode=disable -path db/migrations force VERSION_NUMBER`
