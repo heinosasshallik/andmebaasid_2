@@ -15,6 +15,8 @@ Download the project to your preferred location (anywhere besides inside your $G
 
 ## API
 
+### Basics
+
 Learn Go from here:
 https://tour.golang.org/basics/1
 
@@ -35,6 +37,15 @@ fresh
 
 Using this library for migrations:
 https://github.com/golang-migrate/migrate
+
+### Configuration
+
+The configuration is takex from `apex.json` by default. Create the file and configure it with your credentials.
+
+```
+cd config
+cp apex.sample.json apex.json
+```
 
 ## Frontend
 
