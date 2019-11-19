@@ -89,6 +89,9 @@ SERVER minu_testandmete_server_apex;
 CREATE FOREIGN TABLE Isik_jsonb (
 isik JSONB )
 SERVER minu_testandmete_server_apex;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA
+public;
 ```
 
 ### DEPRECATED, WE ARE USING APEX DATABASE
