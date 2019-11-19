@@ -3,7 +3,7 @@ START TRANSACTION;
 DROP VIEW IF EXISTS laudade_koondaruanne;
 DROP VIEW IF EXISTS laua_kategooriate_omamine;
 DROP VIEW IF EXISTS koik_lauad;
-DROP VIEW IF EXISTS ootel_mitteaktiivsed_lauad;
+DROP VIEW IF EXISTS aktiivsed_mitteaktiivsed_lauad;
 DROP VIEW IF EXISTS laua_detailid;
 
 CREATE VIEW laudade_koondaruanne WITH (security_barrier) AS (
@@ -24,7 +24,6 @@ CREATE VIEW laua_kategooriate_omamine WITH (security_barrier) AS (
                     INNER JOIN Laua_kategooria_omamine 
                     USING (laua_kategooria_kood)) 
         USING (laua_kategooria_tyyp_kood)
-
     );
 
 CREATE VIEW koik_lauad WITH (security_barrier) AS
@@ -32,7 +31,7 @@ CREATE VIEW koik_lauad WITH (security_barrier) AS
   FROM Laua_seisundi_liik AS LSS INNER JOIN Laud AS L ON LSS.laua_seisundi_liik_kood = L.laua_seisundi_liik_kood
   ORDER BY L.laua_kood;
 
-CREATE VIEW ootel_mitteaktiivsed_lauad WITH (security_barrier) AS
+CREATE VIEW aktiivsed_mitteaktiivsed_lauad WITH (security_barrier) AS
   SELECT L.laua_kood, LSS.nimetus as staatus, L.kommentaar
   FROM Laua_seisundi_liik AS LSS INNER JOIN Laud AS L ON LSS.laua_seisundi_liik_kood = L.laua_seisundi_liik_kood
   WHERE (((L.laua_seisundi_liik_kood) In (2,3)));
@@ -60,7 +59,7 @@ CREATE VIEW laua_detailid WITH (security_barrier) AS
 COMMENT ON VIEW laudade_koondaruanne IS 'Kuvab iga laua elutsükli seisundi kohta selle seisundi koodi, seisundi nimetuse (suurtähtedega) ja hetkel selles seisundis olevate laudade arvu. Kui selles seisundis pole hetkel ühtegi lauda, siis on arv 0. Seisundid on sorteeritud laudade arvu järgi kahanevalt. Kui mitmel seisundil on samasugune laudade arv, siis need on sorteeritud suurtähtedega nime järgi tähestiku järjekorras.';
 COMMENT ON VIEW laua_kategooriate_omamine IS 'Kuvab lauad ja nendega seotud kategooriad ning kategooriate tüüpide nimetused.';
 COMMENT ON VIEW koik_lauad IS 'Kuvab lühiülevaate kõikidest laudadest koos laua staatusega.';
-COMMENT ON VIEW ootel_mitteaktiivsed_lauad IS 'Kuvab ootel või mitteaktiivses seisundis laudade nimekirja, kus on kood, hetkeseisundi nimetus, kommentaar.';
+COMMENT ON VIEW aktiivsed_mitteaktiivsed_lauad IS 'Kuvab aktiivses või mitteaktiivses seisundis laudade nimekirja, kus on kood, hetkeseisundi nimetus, kommentaar.';
 COMMENT ON VIEW laua_detailid IS 'Annab detailse ülevaate laua andmete, seisundi ning laua registreerija kohta.';
 
 COMMIT;
