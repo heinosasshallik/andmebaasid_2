@@ -112,3 +112,24 @@ func GetAllTablesDetailed() []tablemodels.Laud {
 	}
 	return tables
 }
+
+func GetCategories() []tablemodels.Laud {
+	var tables []tablemodels.Laud
+	db := db.GetDB()
+	rows, err := db.Query("select laua_kood, laua_kategooria_kood from laua_kategooria_omamine")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var table tablemodels.Laud
+		if err := rows.Scan(&table.LauaKood, &table.LauaKategooriaKood); err != nil {
+			log.Fatal(err)
+		}
+		tables = append(tables, table)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+	return tables
+}

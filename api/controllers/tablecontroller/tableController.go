@@ -25,3 +25,8 @@ func GetAllTablesDetailed(c *gin.Context) {
 	tables := tableservice.GetAllTablesDetailed()
 	c.JSON(http.StatusOK, &tables)
 }
+
+func GetCategories(c *gin.Context) {
+	categories := tableservice.GetCategories()
+	c.JSON(http.StatusOK, &categories)
+}
