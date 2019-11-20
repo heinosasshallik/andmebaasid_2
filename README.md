@@ -58,7 +58,9 @@ Run `npm run serve` to serve frontend.
 
 ### Connecting to the database from outside the university network
 
-Have to port forward it. Replace my uniid with yours. You don't have to use pgcli to connect, you can use any client you want.
+You can use a VPN.
+
+If you dont want to use the vpn, you have to port forward it. Replace my uniid with yours. You don't have to use pgcli to connect, you can use any client you want. If you want the api to connet, then you have to change the host to localhost in the config. 
 
 ```
 ssh -L 5432:localhost:5432 t179636@apex.ttu.ee
@@ -112,6 +114,6 @@ Running new database migrations:
 
 `migrate -database postgres://USERNAME:PASSWORD@IP_ADDRESS:5432/TABLE_NAME?sslmode=disable -path db/migrations up`
 
-Forcing the migration to a specific version. Fixed the "dirty" state. I don't think it actually makes any changes. Useful if a migration went wrong.
+Forcing the migration to a specific version. Fixes the "dirty" state. I don't think it actually makes any changes. Useful if a migration went wrong.
 
 `migrate -database postgres://USERNAME:PASSWORD@IP_ADDRESS:5432/TABLE_NAME?sslmode=disable -path db/migrations force VERSION_NUMBER`

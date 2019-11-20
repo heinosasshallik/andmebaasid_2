@@ -26,3 +26,24 @@ func GetSummaryReport() []tablemodels.SummaryRow {
 	}
 	return summaryReport
 }
+
+func GetEndableTables() []tablemodels.Laud {
+	var endableTables []tablemodels.Laud
+	db := db.GetDB()
+	rows, err := db.Query("select laua_kood, staatus, kommentaar from aktiivsed_mitteaktiivsed_lauad")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var table tablemodels.Laud
+		if err := rows.Scan(&table.LauaKood, &table.Staatus, &table.Kommentaar); err != nil {
+			log.Fatal(err)
+		}
+		endableTables = append(endableTables, table)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+	return endableTables
+}

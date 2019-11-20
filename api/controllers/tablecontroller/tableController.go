@@ -10,3 +10,8 @@ func GetSummaryReport(c *gin.Context) {
 	summary := tableservice.GetSummaryReport()
 	c.JSON(http.StatusOK, &summary)
 }
+
+func GetEndableTables(c *gin.Context) {
+	endableTables := tableservice.GetEndableTables()
+	c.JSON(http.StatusOK, &endableTables)
+}
