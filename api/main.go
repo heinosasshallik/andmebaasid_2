@@ -23,6 +23,8 @@ func main() {
 		{
 			table.GET("/summary", TableController.GetSummaryReport)
 			table.GET("/endable", TableController.GetEndableTables)
+			table.GET("/all", TableController.GetAllTables)
+			table.GET("/details", TableController.GetAllTablesDetailed)
 		}
 		tasks := v1.Group("/test")
 		{

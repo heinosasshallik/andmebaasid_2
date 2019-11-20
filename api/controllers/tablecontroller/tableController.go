@@ -15,3 +15,13 @@ func GetEndableTables(c *gin.Context) {
 	endableTables := tableservice.GetEndableTables()
 	c.JSON(http.StatusOK, &endableTables)
 }
+
+func GetAllTables(c *gin.Context) {
+	tables := tableservice.GetAllTables()
+	c.JSON(http.StatusOK, &tables)
+}
+
+func GetAllTablesDetailed(c *gin.Context) {
+	tables := tableservice.GetAllTablesDetailed()
+	c.JSON(http.StatusOK, &tables)
+}
