@@ -6,70 +6,70 @@ import (
 	"log"
 )
 
-func GetSummaryReport() []tablemodels.SummaryRow {
+func GetSummaryReport() ([]tablemodels.SummaryRow, error) {
 	var summaryReport []tablemodels.SummaryRow
 	db := db.GetDB()
 	rows, err := db.Query("select laua_seisundi_liik_kood, staatus, kogus from laudade_koondaruanne")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var row tablemodels.SummaryRow
 		if err := rows.Scan(&row.LauaSeisundiLiikKood, &row.Staatus, &row.Kogus); err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 		summaryReport = append(summaryReport, row)
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
-	return summaryReport
+	return summaryReport, nil
 }
 
-func GetEndableTables() []tablemodels.Laud {
+func GetEndableTables() ([]tablemodels.Laud, error) {
 	var endableTables []tablemodels.Laud
 	db := db.GetDB()
 	rows, err := db.Query("select laua_kood, staatus, kommentaar from aktiivsed_mitteaktiivsed_lauad")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var table tablemodels.Laud
 		if err := rows.Scan(&table.LauaKood, &table.Staatus, &table.Kommentaar); err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 		endableTables = append(endableTables, table)
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
-	return endableTables
+	return endableTables, nil
 }
 
-func GetAllTables() []tablemodels.Laud {
+func GetAllTables() ([]tablemodels.Laud, error) {
 	var tables []tablemodels.Laud
 	db := db.GetDB()
 	rows, err := db.Query("select laua_kood, staatus, kommentaar from koik_lauad")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var table tablemodels.Laud
 		if err := rows.Scan(&table.LauaKood, &table.Staatus, &table.Kommentaar); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		tables = append(tables, table)
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
-	return tables
+	return tables, nil
 }
 
-func GetAllTablesDetailed() []tablemodels.Laud {
+func GetAllTablesDetailed() ([]tablemodels.Laud, error) {
 	var tables []tablemodels.Laud
 	db := db.GetDB()
 	rows, err := db.Query(`
@@ -87,7 +87,7 @@ func GetAllTablesDetailed() []tablemodels.Laud {
 			laua_detailid
 	`)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
@@ -103,33 +103,39 @@ func GetAllTablesDetailed() []tablemodels.Laud {
 			&table.IsikuNimi,
 			&table.IsikuEmail,
 		); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		tables = append(tables, table)
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
-	return tables
+	return tables, nil
 }
 
-func GetCategories() []tablemodels.Laud {
+func GetCategories() ([]tablemodels.Laud, error) {
 	var tables []tablemodels.Laud
 	db := db.GetDB()
 	rows, err := db.Query("select laua_kood, laua_kategooria_kood from laua_kategooria_omamine")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var table tablemodels.Laud
 		if err := rows.Scan(&table.LauaKood, &table.LauaKategooriaKood); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		tables = append(tables, table)
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
-	return tables
+	return tables, nil
+}
+
+func EndTable(id int) tablemodels.Laud {
+	var table tablemodels.Laud
+	//db := db.GetDB()
+	return table
 }

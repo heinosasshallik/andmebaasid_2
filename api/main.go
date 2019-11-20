@@ -26,6 +26,7 @@ func main() {
 			table.GET("/all", TableController.GetAllTables)
 			table.GET("/details", TableController.GetAllTablesDetailed)
 			table.GET("/categories", TableController.GetCategories)
+			table.PUT("/:id/end", TableController.EndTable)
 		}
 		tasks := v1.Group("/test")
 		{
