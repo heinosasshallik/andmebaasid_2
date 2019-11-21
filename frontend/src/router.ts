@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Login from './views/Login.vue';
 import AllTables from './views/AllTables.vue';
+import SummaryReport from "@/views/SummaryReport.vue";
+import EndingTables from "@/views/EndingTables.vue";
 
 Vue.use(Router);
 
@@ -16,6 +18,16 @@ const router = new Router({
       path: '/all_tables',
       name: 'all_tables',
       component: AllTables,
+    },
+    {
+      path: '/summary_report',
+      name: 'summary_report',
+      component: SummaryReport,
+    },
+    {
+      path: '/ending_tables',
+      name: 'ending_tables',
+      component: EndingTables,
     },
   ],
 });

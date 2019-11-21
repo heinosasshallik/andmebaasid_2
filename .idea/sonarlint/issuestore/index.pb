@@ -28,3 +28,17 @@ P
  frontend/src/views/AllTables.vue,5\6\563abb57da8d2f29abd344d2489beb6ea9c5d5b0
 L
 frontend/src/views/Login.vue,6\e\6e98d41b711f49cb2e8d4582baa4a54afc4cdeda
+;
+api/main.go,0\6\06ee2efc0a3f8124143a8ff7aaf210185538dee8
+:
+
+api/go.sum,e\2\e26a5fa96b04253e661f527ebe3a68b787905cca
+B
+api/models/user.go,2\a\2a885e3d5bf3eca62a8b262e5eb81ddbf154dd3b
+D
+api/config/config.go,9\3\93a55bff199683e7cb3ba19057ffc45768ef4528
+:
+
+api/go.mod,a\7\a7b72dc46c2547e4339d48251f6378aa2c3b6aad
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

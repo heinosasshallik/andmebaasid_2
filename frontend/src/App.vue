@@ -11,10 +11,10 @@
               <router-link to="/all_tables" class="text-black">Vaata kõiki laudu</router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link to="/" class="text-black">Lõpeta laud</router-link>
+              <router-link to="/ending_tables" class="text-black">Lõpeta laud</router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link to="/" class="text-black">Vaata laudade koondaruannet</router-link>
+              <router-link to="/summary_report" class="text-black">Vaata laudade koondaruannet</router-link>
             </b-nav-item>
           </b-navbar-nav>
 
