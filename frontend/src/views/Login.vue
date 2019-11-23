@@ -12,7 +12,7 @@
               <b-form-input
                   id="email-input"
                   v-model="form.email"
-                  type="email"
+                  type="username"
                   required
                   placeholder="Sisesta e-mail">
               </b-form-input>

@@ -4,6 +4,7 @@ import Login from './views/Login.vue';
 import AllTables from './views/AllTables.vue';
 import SummaryReport from "@/views/SummaryReport.vue";
 import EndingTables from "@/views/EndingTables.vue";
+import TableDetails from "@/views/TableDetails.vue";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ const router = new Router({
       path: '/ending_tables',
       name: 'ending_tables',
       component: EndingTables,
+    },
+    {
+      path: '/table_details/:tableId',
+      name: 'table_details',
+      component: TableDetails,
     },
   ],
 });

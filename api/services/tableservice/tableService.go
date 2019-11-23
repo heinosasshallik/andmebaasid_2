@@ -116,14 +116,14 @@ func GetAllTablesDetailed() ([]tablemodels.Laud, error) {
 func GetCategories() ([]tablemodels.Laud, error) {
 	var tables []tablemodels.Laud
 	db := db.GetDB()
-	rows, err := db.Query("select laua_kood, laua_kategooria_kood from laua_kategooria_omamine")
+	rows, err := db.Query("select laua_kood, kategooria from laua_kategooriate_omamine")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var table tablemodels.Laud
-		if err := rows.Scan(&table.LauaKood, &table.LauaKategooriaKood); err != nil {
+		if err := rows.Scan(&table.LauaKood, &table.Kategooria); err != nil {
 			log.Println(err)
 		}
 		tables = append(tables, table)

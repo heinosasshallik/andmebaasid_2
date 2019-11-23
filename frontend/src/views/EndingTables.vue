@@ -1,13 +1,15 @@
 <template>
   <div class="home">
 
+    <h2 class="mt-2 mb-3">Lõpetatavad lauad</h2>
+
     <b-table class="ending-table"
              striped
              hover
              :items="this.tableData"
              :fields="this.fields">
-      <template v-slot:cell(end_table)="row">
-        <b-button size="sm" @click="row.toggleDetails" class="mr-2 btn-danger">
+      <template v-slot:cell(end)="data">
+        <b-button size="sm" @click="endTable(data.item.LauaKood)" class="mr-2 btn-danger">
           Lõpeta
         </b-button>
       </template>
@@ -28,7 +30,12 @@
         data() {
             return {
                 tableData: [],
-                fields: ['LauaKood', 'Kommentaar.String', 'Staatus', 'end_table']
+                fields: [
+                    {'LauaKood': 'Laua kood'},
+                    {'Kommentaar.String': 'Kommentaar'},
+                    {'Staatus': 'Seisund'},
+                    {'end': 'Lõpeta'},
+                ]
             };
         },
         methods: {
@@ -42,6 +49,9 @@
                     .then(response => response.json())
                     .then(data => this.tableData = data)
             },
+            endTable(tableCode: bigint): void {
+                // TODO: confirmation modal + call method to end table
+            }
         },
         beforeMount(): void {
             this.loadData();
@@ -49,9 +59,9 @@
     }
 </script>
 
-<style>
+<style scoped>
   .ending-table {
     margin: auto;
-    width: 60% !important;
+    width: 50% !important;
   }
 </style>

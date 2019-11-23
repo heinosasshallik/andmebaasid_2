@@ -6,14 +6,14 @@ import (
 )
 
 type Laud struct {
-	LauaKood           int
-	Staatus            string
-	Kommentaar         sql.NullString
-	LauaVorguKorgus    int
-	MaxMangijateArv    int
-	RegAeg             time.Time
-	Brand              string
-	IsikuNimi          string
-	IsikuEmail         string
-	LauaKategooriaKood int
+	LauaKood        int
+	Staatus         string
+	Kommentaar      sql.NullString
+	LauaVorguKorgus int
+	MaxMangijateArv int
+	RegAeg          time.Time
+	Brand           string
+	IsikuNimi       string
+	IsikuEmail      string
+	Kategooria      string
 }
