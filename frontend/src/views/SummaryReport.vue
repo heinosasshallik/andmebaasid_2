@@ -15,33 +15,21 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import getRequest from "@/requests"; // @ is an alias to /src
+    import {getRequest} from '@/requests';
 
-    @Component({
-        components: {}
-    })
-    export default {
-        data() {
-            return {
-                tableData: [],
-                fields: [
-                    {'LauaSeisundiLiikKood': 'Kood'},
-                    {'Staatus': 'Seisund'},
-                    {'Kogus': 'Kogus'},
-                ]
-            };
-        },
-        methods: {
-            loadData(): void {
-                getRequest('/api/v1/table/summary')
-                    .then(response => response.json())
-                    .then(data =>
-                        this.tableData = data
-                    )
-            },
-        },
-        beforeMount(): void {
-            this.loadData();
+    @Component
+    export default class SummaryReport extends Vue {
+        private tableData: object[] = [];
+        private fields: object[] = [
+            {'LauaSeisundiLiikKood': 'Kood'},
+            {'Staatus': 'Seisund'},
+            {'Kogus': 'Kogus'},
+        ];
+
+        private mounted(): void {
+            getRequest('/api/v1/table/summary')
+                .then((response) => response.json())
+                .then((data) => this.tableData = data);
         }
     }
 </script>

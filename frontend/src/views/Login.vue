@@ -1,7 +1,9 @@
 <template>
   <div>
     <b-container fluid>
-      <b-row class="my-1 justify-content-center" >
+      <b-row class="my-1 justify-content-center">
+        <h3 class="my-4">Lauatennise laudade arvestuse infosüsteem</h3>
+
         <b-col md="8" lg="6" xl="5">
 
           <b-form @submit="onSubmit" @reset="onReset">
@@ -11,8 +13,7 @@
                 label-for="email-input">
               <b-form-input
                   id="email-input"
-                  v-model="form.email"
-                  type="username"
+                  v-model="email"
                   required
                   placeholder="Sisesta e-mail">
               </b-form-input>
@@ -21,7 +22,7 @@
             <b-form-group id="password-input-group" label="Salasõna:" label-for="password-input">
               <b-form-input
                   id="password-input"
-                  v-model="form.password"
+                  v-model="password"
                   type="password"
                   required
                   placeholder="Sisesta salasõna">
@@ -38,33 +39,30 @@
   </div>
 </template>
 
-<script>
-  //todo: hmm, typescript?
-    export default {
-        data() {
-            return {
-                form: {
-                    email: '',
-                    password: '',
-                },
-            };
-        },
-        methods: {
-            onSubmit(evt) {
-                evt.preventDefault();
-                // todo: if backend has endpoint ready, send it there
-                //alert(JSON.stringify(this.form));
-                if (true) { // todo: check response and enter here if auth successful
-                    this.$router.push({ path: 'all_tables'});
-                } else {
-                    console.log('whoopsie'); // todo: error handling or smth
-                }
-            },
-            onReset(evt) {
-                evt.preventDefault();
-                this.form.email = '';
-                this.form.password = '';
-            },
-        },
-    };
+<script lang="ts">
+    import {Component, Vue} from 'vue-property-decorator';
+
+    @Component
+    export default class Login extends Vue {
+        private email: string = '';
+        private password: string = '';
+
+        onSubmit(event: Event): void {
+            event.preventDefault();
+            // todo: if backend has endpoint ready, send it there
+            //alert(JSON.stringify(this.form));
+            if (true) { // todo: check response and enter here if auth successful
+                this.$router.push({path: 'all_tables'});
+            } else {
+                console.log('whoopsie'); // todo: error handling or smth
+            }
+        }
+
+        onReset(event: Event): void {
+            event.preventDefault();
+            this.email = '';
+            this.password = '';
+        }
+
+    }
 </script>

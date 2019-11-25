@@ -9,52 +9,70 @@
              :items="this.tableData"
              :fields="this.fields">
       <template v-slot:cell(end)="data">
-        <b-button size="sm" @click="endTable(data.item.LauaKood)" class="mr-2 btn-danger">
+        <b-button size="sm" @click="confirmEndingTable(data.item.LauaKood)" class="mr-2 btn-danger">
           Lõpeta
         </b-button>
       </template>
-
     </b-table>
+
+    <b-modal v-model="showModal"
+             centered
+             title="Kinnitus">
+      <p class="my-4">Kas soovite lauda koodiga {{tableToEndCode}} lõpetada?</p>
+      <template v-slot:modal-footer>
+        <div class="w-100">
+          <b-button variant="secondary"
+                    class="float-right mr-2"
+                    @click="cancelEndingTable()">
+            Ei
+          </b-button>
+          <b-button variant="warning"
+                    class="float-right mr-3"
+                    @click="endTable()">
+            Jah
+          </b-button>
+        </div>
+      </template>
+    </b-modal>
 
   </div>
 </template>
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import {URL} from "@/constants"; // @ is an alias to /src
+    import {getRequest} from '@/requests';
 
-    @Component({
-        components: {}
-    })
-    export default {
-        data() {
-            return {
-                tableData: [],
-                fields: [
-                    {'LauaKood': 'Laua kood'},
-                    {'Kommentaar.String': 'Kommentaar'},
-                    {'Staatus': 'Seisund'},
-                    {'end': 'Lõpeta'},
-                ]
-            };
-        },
-        methods: {
-            loadData(): void {
-                fetch(URL + '/api/v1/table/endable', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                })
-                    .then(response => response.json())
-                    .then(data => this.tableData = data)
-            },
-            endTable(tableCode: bigint): void {
-                // TODO: confirmation modal + call method to end table
-            }
-        },
-        beforeMount(): void {
-            this.loadData();
+    @Component
+    export default class EndingTables extends Vue {
+        private tableData: object[] = [];
+        private fields: object[] = [
+            {'LauaKood': 'Laua kood'},
+            {'Kommentaar.String': 'Kommentaar'},
+            {'Staatus': 'Seisund'},
+            {'end': 'Lõpeta'},
+        ];
+        private showModal: boolean = false;
+        private tableToEndCode: number = -1;
+
+        private confirmEndingTable(tableCode: number): void {
+            this.tableToEndCode = tableCode;
+            this.showModal = true;
+        }
+
+        private cancelEndingTable(): void {
+            this.tableToEndCode = -1;
+            this.showModal = false;
+        }
+
+        private endTable(): void {
+            this.showModal = false;
+            // TODO: call method to end table
+        }
+
+        private mounted(): void {
+            getRequest('/api/v1/table/endable')
+                .then((response) => response.json())
+                .then((data) => this.tableData = data);
         }
     }
 </script>
@@ -62,6 +80,6 @@
 <style scoped>
   .ending-table {
     margin: auto;
-    width: 50% !important;
+    width: 55% !important;
   }
 </style>

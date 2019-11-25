@@ -20,36 +20,27 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import router from "@/router";
-    import getRequest from "@/requests"; // @ is an alias to /src
+    import router from '@/router';
+    import {getRequest} from '@/requests';
 
-    @Component({
-        components: {}
-    })
-    export default {
-        data() {
-            return {
-                tableData: [],
-                fields: [
-                    {'LauaKood': 'Laua kood'},
-                    {'Kommentaar.String': 'Kommentaar'},
-                    {'Staatus': 'Seisund'},
-                    {'details': 'Detailid'},
-                ]
-            };
-        },
-        methods: {
-            loadData(): void {
-                getRequest('/api/v1/table/all')
-                    .then(response => response.json())
-                    .then(data => this.tableData = data)
-            },
-            goToDetails(tableId: bigint): void {
-                router.push('/table_details/' + tableId.toString())
-            }
-        },
-        beforeMount(): void {
-            this.loadData();
+    @Component
+    export default class AllTables extends Vue {
+        private tableData: object[] = [];
+        private fields: object[] = [
+            {'LauaKood': 'Laua kood'},
+            {'Kommentaar.String': 'Kommentaar'},
+            {'Staatus': 'Seisund'},
+            {'details': 'Detailid'},
+        ];
+
+        private mounted(): void {
+            getRequest('/api/v1/table/all')
+                .then((response) => response.json())
+                .then((data) => this.tableData = data);
+        }
+
+        private goToDetails(tableId: number): void {
+            router.push('/table_details/' + tableId.toString());
         }
     }
 </script>
@@ -57,6 +48,6 @@
 <style scoped>
   .all-table {
     margin: auto;
-    width: 50% !important;
+    width: 55% !important;
   }
 </style>

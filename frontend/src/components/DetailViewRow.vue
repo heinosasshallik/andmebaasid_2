@@ -11,8 +11,13 @@
 </template>
 
 <script lang="ts">
-    export default {
-        props: ['labelData', 'descriptionData', 'longDescription']
+    import {Component, Prop, Vue} from 'vue-property-decorator';
+
+    @Component
+    export default class DetailViewRow extends Vue {
+        @Prop() labelData!: string;
+        @Prop() descriptionData!: string;
+        @Prop() longDescription!: boolean;
     }
 </script>
 
