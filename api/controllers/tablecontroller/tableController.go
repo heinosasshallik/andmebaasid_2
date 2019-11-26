@@ -38,18 +38,30 @@ func GetAllTables(c *gin.Context) {
 	c.JSON(http.StatusOK, &tables)
 }
 
-func GetAllTablesDetailed(c *gin.Context) {
-	tables, err := tableservice.GetAllTablesDetailed()
+func GetTableDetailed(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	table, err := tableservice.GetTableDetailed(id)
 	if err != nil {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}
-	c.JSON(http.StatusOK, &tables)
+	c.JSON(http.StatusOK, &table)
 }
 
 func GetCategories(c *gin.Context) {
-	categories, err := tableservice.GetCategories()
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	categories, err := tableservice.GetCategories(id)
 	if err != nil {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)
@@ -60,10 +72,16 @@ func GetCategories(c *gin.Context) {
 
 func EndTable(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
-	if err == nil {
+	if err != nil {
+		log.Println(err)
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	categories := tableservice.EndTable(id)
-	c.JSON(http.StatusOK, &categories)
+	id, err = tableservice.EndTable(id)
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+	c.JSON(http.StatusOK, &id)
 }

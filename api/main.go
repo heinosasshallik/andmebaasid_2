@@ -37,9 +37,9 @@ func main() {
 			table.GET("/summary", TableController.GetSummaryReport)
 			table.GET("/endable", TableController.GetEndableTables)
 			table.GET("/all", TableController.GetAllTables)
-			table.GET("/details", TableController.GetAllTablesDetailed)
-			table.GET("/categories", TableController.GetCategories)
-			table.PUT("/:id/end", TableController.EndTable)
+			table.GET("/details/:id", TableController.GetTableDetailed)
+			table.GET("/categories/:id", TableController.GetCategories)
+			table.PUT("/end/:id", TableController.EndTable)
 		}
 		tasks := v1.Group("/test")
 		{
