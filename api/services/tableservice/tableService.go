@@ -3,7 +3,6 @@ package tableservice
 import (
 	"github.com/heinosasshallik/andmebaasid_2/api/db"
 	"github.com/heinosasshallik/andmebaasid_2/api/models/tablemodels"
-	"log"
 )
 
 func GetSummaryReport() ([]tablemodels.SummaryRow, error) {
@@ -59,20 +58,20 @@ func GetAllTables() ([]tablemodels.Laud, error) {
 	for rows.Next() {
 		var table tablemodels.Laud
 		if err := rows.Scan(&table.LauaKood, &table.Staatus, &table.Kommentaar); err != nil {
-			log.Println(err)
+			return nil, err
 		}
 		tables = append(tables, table)
 	}
 	if err := rows.Err(); err != nil {
-		log.Println(err)
+		return nil, err
 	}
 	return tables, nil
 }
 
-func GetAllTablesDetailed() ([]tablemodels.Laud, error) {
-	var tables []tablemodels.Laud
+func GetTableDetailed(id int) (tablemodels.Laud, error) {
+	var table tablemodels.Laud
 	db := db.GetDB()
-	rows, err := db.Query(`
+	row := db.QueryRow(`
 		select 
 			laua_kood,
 			laua_vorgu_korgus,
@@ -86,56 +85,43 @@ func GetAllTablesDetailed() ([]tablemodels.Laud, error) {
 		from
 			laua_detailid
 	`)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var table tablemodels.Laud
-		if err := rows.Scan(
-			&table.LauaKood,
-			&table.LauaVorguKorgus,
-			&table.MaxMangijateArv,
-			&table.RegAeg,
-			&table.Kommentaar,
-			&table.Staatus,
-			&table.Brand,
-			&table.IsikuNimi,
-			&table.IsikuEmail,
-		); err != nil {
-			log.Println(err)
-		}
-		tables = append(tables, table)
-	}
-	if err := rows.Err(); err != nil {
-		log.Println(err)
-	}
-	return tables, nil
+	err := row.Scan(
+		&table.LauaKood,
+		&table.LauaVorguKorgus,
+		&table.MaxMangijateArv,
+		&table.RegAeg,
+		&table.Kommentaar,
+		&table.Staatus,
+		&table.Brand,
+		&table.IsikuNimi,
+		&table.IsikuEmail,
+	)
+	return table, err
 }
 
-func GetCategories() ([]tablemodels.Laud, error) {
-	var tables []tablemodels.Laud
-	db := db.GetDB()
-	rows, err := db.Query("select laua_kood, kategooria from laua_kategooriate_omamine")
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var table tablemodels.Laud
-		if err := rows.Scan(&table.LauaKood, &table.Kategooria); err != nil {
-			log.Println(err)
-		}
-		tables = append(tables, table)
-	}
-	if err := rows.Err(); err != nil {
-		log.Println(err)
-	}
-	return tables, nil
-}
-
-func EndTable(id int) tablemodels.Laud {
+func GetCategories(id int) (tablemodels.Laud, error) {
 	var table tablemodels.Laud
-	//db := db.GetDB()
-	return table
+	db := db.GetDB()
+	row := db.QueryRow(`
+	select
+		laua_kood,
+		kategooria
+	from
+		laua_kategooriate_omamine
+	where
+		laua_kood = $1
+	`, id)
+
+	err := row.Scan(&table.LauaKood, &table.Kategooria)
+	return table, err
+}
+
+func EndTable(id int) (int, error) {
+	db := db.GetDB()
+	rows, err := db.Query("select f_lopeta_laud($1)", id)
+	if err != nil {
+		return id, err
+	}
+	defer rows.Close()
+	return id, nil
 }
