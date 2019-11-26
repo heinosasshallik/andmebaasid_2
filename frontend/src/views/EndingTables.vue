@@ -40,7 +40,7 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import {getRequest} from '@/requests';
+    import {getRequest, putRequest} from '@/requests';
 
     @Component
     export default class EndingTables extends Vue {
@@ -66,7 +66,7 @@
 
         private endTable(): void {
             this.showModal = false;
-            // TODO: call method to end table
+            putRequest(`/api/v1/table/end/${this.tableToEndCode}`, {});  // TODO: call method to end table
         }
 
         private mounted(): void {

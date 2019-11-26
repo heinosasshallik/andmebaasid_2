@@ -9,11 +9,12 @@ export async function getRequest(url: string) {
     })
 }
 
-export async function putRequest(url: string) {
+export async function putRequest(url: string, body: any) {
     return await fetch(URL + url, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
+        body: JSON.stringify(body)
     })
 }
