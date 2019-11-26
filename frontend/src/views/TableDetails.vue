@@ -3,7 +3,7 @@
 
     <h2 class="mt-2 mb-3">Laua detailid</h2>
 
-    <b-container class="bv-example-row" v-if="this.tableData.LauaKood">
+    <b-container class="bv-example-row" v-if="this.tableData && this.tableData.LauaKood">
 
       <DetailViewRow :labelData="'Laua kood'"
                      :descriptionData="this.tableData.LauaKood"/>
@@ -62,10 +62,10 @@
         private categoriesData: object[] = [];
 
         private mounted(): void {
-            getRequest('/api/v1/table/details')       // TODO: add /this.$route.query.page
+            getRequest(`/api/v1/table/details/${this.$route.params.tableId}`)
                 .then((response) => response.json())
-                .then((data) => this.tableData = data[0]);
-            getRequest('/api/v1/table/categories')    // TODO: add /this.$route.query.page
+                .then((data) => this.tableData = data);
+            getRequest(`/api/v1/table/categories/${this.$route.params.tableId}`)
                 .then((response) => response.json())
                 .then((data) => this.categoriesData = data);
         }

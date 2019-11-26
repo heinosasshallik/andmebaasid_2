@@ -64,15 +64,20 @@
             this.showModal = false;
         }
 
-        private endTable(): void {
-            this.showModal = false;
-            putRequest(`/api/v1/table/end/${this.tableToEndCode}`, {});  // TODO: call method to end table
-        }
-
-        private mounted(): void {
+        private loadData(): void {
             getRequest('/api/v1/table/endable')
                 .then((response) => response.json())
                 .then((data) => this.tableData = data);
+        }
+
+        private endTable(): void {
+            this.showModal = false;
+            putRequest(`/api/v1/table/end/${this.tableToEndCode}`, {})
+                .then(() => this.loadData());
+        }
+
+        private mounted(): void {
+            this.loadData();
         }
     }
 </script>
