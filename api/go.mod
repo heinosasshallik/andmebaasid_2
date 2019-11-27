@@ -3,6 +3,7 @@ module github.com/heinosasshallik/andmebaasid_2/api
 go 1.13
 
 require (
+	github.com/appleboy/gin-jwt/v2 v2.6.2
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-gonic/gin v1.4.0
 	github.com/howeyc/fsnotify v0.9.0 // indirect

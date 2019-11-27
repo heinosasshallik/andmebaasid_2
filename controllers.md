@@ -14,3 +14,6 @@
 laud, mille id kaasa anti
 * Lauaga seotud kategooriate request tuleb koos id'ga, küsi vaatest 
 laua_kategooriate_omamine selle id'ga tulemusi
+
+anna roll stringina ja id'na. Ise if lausetes kasuta id'na.
+!!!!!!! laual võib olla rohkem kui 1 kategooria. Tee uus mudel ja listina. Ja võta laua mudelist kategooria ära
