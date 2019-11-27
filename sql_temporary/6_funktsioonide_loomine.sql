@@ -3,9 +3,9 @@ Laua aktiveerimine ning deaktiveerimine.
 
 Laused testimiseks:
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4;
-call aktiveeri_laud(4);
+select f_aktiveeri_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
-call deaktiveeri_laud(4);
+select f_deaktiveeri_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 3
 */
 
@@ -47,7 +47,7 @@ Laua lõpetmaine.
 
 Laused testimiseks:
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
-call lopeta_laud(4);
+select f_lopeta_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 4
 */
 DROP FUNCTION IF EXISTS f_lopeta_laud;
