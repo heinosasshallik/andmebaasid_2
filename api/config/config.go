@@ -15,8 +15,13 @@ type databaseConfiguration struct {
 	Database string `json:"database"`
 }
 
+type authConfiguration struct {
+	JWTSecret string `json:"jwtSecret"`
+}
+
 type configuration struct {
-	Database databaseConfiguration `json:"db"`
+	Database       databaseConfiguration `json:"db"`
+	Authentication authConfiguration     `json:"auth"`
 }
 
 var conf configuration
