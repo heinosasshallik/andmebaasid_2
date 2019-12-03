@@ -10,7 +10,7 @@ import (
 
 func GetUserInfo(c *gin.Context) {
 	claims := jwt.ExtractClaims(c)
-	email := claims["email"]
+	email := claims["email"].(string)
 	user, err := userservice.GetUserByEmail(email)
 	if err != nil {
 		log.Println(err)

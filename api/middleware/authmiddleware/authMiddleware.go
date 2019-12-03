@@ -68,7 +68,7 @@ func unauthorizedResponse(c *gin.Context, code int, message string) {
 func SetupAuthMiddleware(router *gin.Engine) *jwt.GinJWTMiddleware {
 	var config = config.GetConfiguration()
 	authMiddleware, err := jwt.New(&jwt.GinJWTMiddleware{
-		Realm:           "laudade haldur",
+		Realm:           "juhataja",
 		Key:             []byte(config.Authentication.JWTSecret),
 		Timeout:         time.Hour,
 		MaxRefresh:      time.Hour,

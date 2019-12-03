@@ -2,7 +2,6 @@ package userservice
 
 import (
 	"database/sql"
-	"errors"
 	"log"
 
 	"github.com/heinosasshallik/andmebaasid_2/api/db"
@@ -96,7 +95,7 @@ func getProfessions(userID int) ([]usermodels.Amet, error) {
 	return professions, nil
 }
 
-func getUserByEmail(email string) (usermodels.Isik, error) {
+func GetUserByEmail(email string) (usermodels.Isik, error) {
 	user, err := getUserInfo(email)
 	if err != nil {
 		return user, err
@@ -109,18 +108,7 @@ func getUserByEmail(email string) (usermodels.Isik, error) {
 	if err != nil {
 		return user, err
 	}
-	user.TootajaInfo = worker
 	worker.Ametid = professions
+	user.TootajaInfo = worker
 	return user, nil
-}
-
-func AuthenticateUser(email string, password string) (usermodels.Isik, error) {
-	var user usermodels.Isik
-	var err error
-	if CredentialsValid(email, password) {
-		user, err = getUserByEmail(email)
-	} else {
-		err = errors.New("Invalid credentials")
-	}
-	return user, err
 }

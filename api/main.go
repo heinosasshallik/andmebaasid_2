@@ -6,6 +6,7 @@ import (
 
 	"github.com/heinosasshallik/andmebaasid_2/api/config"
 	TableController "github.com/heinosasshallik/andmebaasid_2/api/controllers/tablecontroller"
+	UserController "github.com/heinosasshallik/andmebaasid_2/api/controllers/usercontroller"
 	"github.com/heinosasshallik/andmebaasid_2/api/db"
 	AuthMiddleware "github.com/heinosasshallik/andmebaasid_2/api/middleware/authmiddleware"
 	CorsMiddleware "github.com/heinosasshallik/andmebaasid_2/api/middleware/corsmiddleware"
@@ -41,6 +42,13 @@ func main() {
 		{
 			auth.POST("/login", authController.LoginHandler)
 			auth.GET("/refresh_token", authController.RefreshHandler)
+		}
+		user := v1.Group("/user")
+		{
+			user.Use(authController.MiddlewareFunc())
+			{
+				user.GET("/me", UserController.GetUserInfo)
+			}
 		}
 	}
 
