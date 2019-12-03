@@ -30,7 +30,7 @@
         <b-col v-if="i === 0" cols="4" class="text-right pt-2">Laua kategooriad</b-col>
         <b-col v-if="i !== 0" cols="4" class="text-right"></b-col>
         <b-col cols="8" class="text-left">
-          <b-form-input v-model="category.Kategooria" :readonly=true></b-form-input>
+          <b-form-input v-model="categoriesData[i]" :readonly=true></b-form-input>
         </b-col>
       </b-row>
 
@@ -54,8 +54,8 @@
 
     @Component({
         components: {
-            DetailViewRow,
-        },
+            DetailViewRow
+        }
     })
     export default class TableDetails extends Vue {
         private tableData: object = {};
@@ -67,7 +67,7 @@
                 .then((data) => this.tableData = data);
             getRequest(`/api/v1/table/categories/${this.$route.params.tableId}`)
                 .then((response) => response.json())
-                .then((data) => this.categoriesData = data);
+                .then((data) => this.categoriesData = data.Kategooriad);
         }
     }
 </script>

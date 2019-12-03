@@ -133,7 +133,7 @@ CREATE TABLE Isik (
 	CONSTRAINT CHK_Isik_synni_kp_varem_kui_reg_aeg CHECK (NOT(reg_aeg<synni_kp)),
 	CONSTRAINT CHK_Isik_eesnimi_max_pikkus_800 CHECK (length(eesnimi)<801),
 	CONSTRAINT CHK_Isik_perenimi_max_pikkus_800 CHECK (length(perenimi)<801),
-	CONSTRAINT CHK_Isik_elukoht_max_pikkus_900 CHECK (length(perenimi)<901),
+	CONSTRAINT CHK_Isik_elukoht_max_pikkus_900 CHECK (length(elukoht)<901),
 	CONSTRAINT FK_Isik_Isiku_seisundi_liik FOREIGN KEY (isiku_seisundi_liik_kood) REFERENCES Isiku_seisundi_liik (isiku_seisundi_liik_kood) ON DELETE No Action ON UPDATE Cascade,
 	CONSTRAINT FK_Isik_riik FOREIGN KEY (riik_kood) REFERENCES Riik (riik_kood) ON DELETE No Action ON UPDATE Cascade
 ) WITH (fillfactor=90);

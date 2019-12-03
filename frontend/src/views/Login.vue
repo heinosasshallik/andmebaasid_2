@@ -43,7 +43,7 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import { putRequest } from '@/requests';
+    import {postRequest} from '@/requests';
 
     @Component
     export default class Login extends Vue {
@@ -52,13 +52,17 @@
 
         onSubmit(event: Event): void {
             event.preventDefault();
-            // alert(JSON.stringify({emeil: this.email, parool: this.password}));
-            // putRequest(`/api/v1/login`, {emeil: this.email, parool: this.password}); // todo
-            if (true) { // todo: check response and enter here if auth successful
-                this.$router.push({path: 'all_tables'});
-            } else {
-                console.log('whoopsie'); // todo: error handling or smth
-            }
+            postRequest(`/api/v1/auth/login`, {email: this.email, password: this.password})
+                .then((response) => response.json())
+                .then((json) => {
+                    if (json.code === 200) {
+                        localStorage.setItem('JWT', 'Bearer ' + json.token);
+                        this.$router.push({path: 'all_tables'});
+                    } else {
+                        // todo: better error handling
+                        alert(json.message);
+                    }
+                });
         }
 
         onReset(event: Event): void {

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Login from './views/Login.vue';
+// @ts-ignore
+import jwt_decode from 'jwt-decode';
 import AllTables from './views/AllTables.vue';
 import SummaryReport from "@/views/SummaryReport.vue";
 import EndingTables from "@/views/EndingTables.vue";
@@ -42,16 +44,24 @@ router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ['/'];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('db-2-jwt');
+  const jwt = localStorage.getItem('JWT');
 
-  // todo uncomment
-  // if (authRequired && !loggedIn) {
-  //   return next('/');
-  // }
+  if (authRequired && !isValidAuthorization(jwt)) {
+    removeJwtIfExists(jwt);
+    return next('/');
+  }
 
   next();
 });
 
-export default router;
+function isValidAuthorization(jwt: any): boolean {
+  return jwt && (Date.now() < jwt_decode(jwt).exp * 1000);
+}
 
-// https://jasonwatmore.com/post/2018/07/14/vue-vuex-user-registration-and-login-tutorial-example
+function removeJwtIfExists(jwt: any): void {
+  if (jwt) {
+    localStorage.removeItem('JWT');
+  }
+}
+
+export default router;
