@@ -24,7 +24,6 @@ CREATE VIEW laua_kategooriate_omamine WITH (security_barrier) AS (
                     INNER JOIN Laua_kategooria_omamine 
                     USING (laua_kategooria_kood)) 
         USING (laua_kategooria_tyyp_kood)
-
     );
 
 CREATE VIEW koik_lauad WITH (security_barrier) AS

@@ -52,7 +52,7 @@
 
         onSubmit(event: Event): void {
             event.preventDefault();
-            alert(JSON.stringify({emeil: this.email, parool: this.password}));
+            // alert(JSON.stringify({emeil: this.email, parool: this.password}));
             // putRequest(`/api/v1/login`, {emeil: this.email, parool: this.password}); // todo
             if (true) { // todo: check response and enter here if auth successful
                 this.$router.push({path: 'all_tables'});
