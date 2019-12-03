@@ -84,7 +84,9 @@ func GetTableDetailed(id int) (tablemodels.Laud, error) {
 			isiku_e_meil
 		from
 			laua_detailid
-	`)
+		where
+			laua_kood = $1
+	`, id)
 	err := row.Scan(
 		&table.LauaKood,
 		&table.LauaVorguKorgus,
@@ -102,17 +104,27 @@ func GetTableDetailed(id int) (tablemodels.Laud, error) {
 func GetCategories(id int) (tablemodels.Laud, error) {
 	var table tablemodels.Laud
 	db := db.GetDB()
-	row := db.QueryRow(`
+	rows, err := db.Query(`
 	select
-		laua_kood,
 		kategooria
 	from
 		laua_kategooriate_omamine
 	where
 		laua_kood = $1
 	`, id)
+	if err != nil {
+		return table, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var category string
+		if err := rows.Scan(&category); err != nil {
+			return table, err
+		}
+		table.Kategooriad = append(table.Kategooriad, category)
+	}
+	table.LauaKood = id
 
-	err := row.Scan(&table.LauaKood, &table.Kategooria)
 	return table, err
 }
 

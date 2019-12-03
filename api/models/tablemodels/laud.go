@@ -15,5 +15,5 @@ type Laud struct {
 	Brand           string
 	IsikuNimi       string
 	IsikuEmail      string
-	Kategooria      string
+	Kategooriad     []string
 }
