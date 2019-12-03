@@ -22,7 +22,8 @@ FROM Tootaja
 INNER JOIN Isik ON Isik.isik_id = Tootaja.isik_id
 WHERE Upper(e_meil)=Upper(p_e_meil) 
 AND amet_kood BETWEEN 1 AND 2 
-AND tootaja_seisundi_liik_kood IN (1, 2, 3);
+AND tootaja_seisundi_liik_kood IN (1, 2, 3)
+AND isiku_seisundi_liik_kood = 1;
 RETURN coalesce(rslt, FALSE);
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER STABLE
