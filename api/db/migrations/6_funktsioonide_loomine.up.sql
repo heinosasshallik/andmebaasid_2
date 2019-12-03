@@ -56,7 +56,8 @@ CREATE OR REPLACE FUNCTION f_lopeta_laud(p_lopetatava_laua_kood INT)
 RETURNS VOID AS $$
     UPDATE laud
     SET laua_seisundi_liik_kood = 4
-    WHERE laua_kood = p_lopetatava_laua_kood AND laua_seisundi_liik_kood <> 1;
+    WHERE laua_kood = p_lopetatava_laua_kood
+    AND laua_seisundi_liik_kood IN (2,3);
 $$  LANGUAGE SQL
     SECURITY DEFINER
     SET search_path = public, pg_temp;

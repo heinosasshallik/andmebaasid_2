@@ -5,6 +5,9 @@ DROP VIEW IF EXISTS laua_kategooriate_omamine;
 DROP VIEW IF EXISTS koik_lauad;
 DROP VIEW IF EXISTS aktiivsed_mitteaktiivsed_lauad;
 DROP VIEW IF EXISTS laua_detailid;
+DROP VIEW IF EXISTS isiku_info;
+DROP VIEW IF EXISTS tootaja_info;
+DROP VIEW IF EXISTS tootaja_ametid;
 
 CREATE VIEW laudade_koondaruanne WITH (security_barrier) AS (
     SELECT  Laua_seisundi_liik.laua_seisundi_liik_kood AS laua_seisundi_liik_kood, 
@@ -64,7 +67,6 @@ CREATE VIEW isiku_info WITH (security_barrier) AS
     COALESCE(Isik.eesnimi || ' ', '') || COALESCE(Isik.perenimi, '') AS isiku_nimi
   FROM
     Isik;
-
 
 CREATE VIEW tootaja_info WITH (security_barrier) AS
   SELECT

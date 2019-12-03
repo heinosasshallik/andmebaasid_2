@@ -5,26 +5,28 @@ DROP VIEW IF EXISTS laua_kategooriate_omamine;
 DROP VIEW IF EXISTS koik_lauad;
 DROP VIEW IF EXISTS aktiivsed_mitteaktiivsed_lauad;
 DROP VIEW IF EXISTS laua_detailid;
+DROP VIEW IF EXISTS isiku_info;
+DROP VIEW IF EXISTS tootaja_info;
+DROP VIEW IF EXISTS tootaja_ametid;
 
 CREATE VIEW laudade_koondaruanne WITH (security_barrier) AS (
-    SELECT  Laua_seisundi_liik.laua_seisundi_liik_kood AS laua_seisundi_liik_kood, 
-            UPPER(Laua_seisundi_liik.nimetus) AS staatus, 
+    SELECT  Laua_seisundi_liik.laua_seisundi_liik_kood AS laua_seisundi_liik_kood,
+            UPPER(Laua_seisundi_liik.nimetus) AS staatus,
             COUNT(Laud.laua_kood) AS kogus
-        FROM Laua_seisundi_liik 
+        FROM Laua_seisundi_liik
         LEFT JOIN Laud USING (laua_seisundi_liik_kood)
         GROUP BY Laua_seisundi_liik.laua_seisundi_liik_kood, Laua_seisundi_liik.nimetus
         ORDER BY COUNT(Laud.laua_kood) DESC, UPPER(Laua_seisundi_liik.nimetus)
     );
 
 CREATE VIEW laua_kategooriate_omamine WITH (security_barrier) AS (
-    SELECT  Laua_kategooria_omamine.laua_kood, 
+    SELECT  Laua_kategooria_omamine.laua_kood,
             Laua_kategooria.nimetus || '(' || Laua_kategooria_tyyp.nimetus || ')' AS kategooria
-        FROM Laua_kategooria_tyyp 
-        INNER JOIN (Laua_kategooria 
-                    INNER JOIN Laua_kategooria_omamine 
-                    USING (laua_kategooria_kood)) 
+        FROM Laua_kategooria_tyyp
+        INNER JOIN (Laua_kategooria
+                    INNER JOIN Laua_kategooria_omamine
+                    USING (laua_kategooria_kood))
         USING (laua_kategooria_tyyp_kood)
-
     );
 
 CREATE VIEW koik_lauad WITH (security_barrier) AS
@@ -50,8 +52,8 @@ CREATE VIEW laua_detailid WITH (security_barrier) AS
     Isik.e_meil AS isiku_e_meil
   FROM
     Laua_seisundi_liik
-  INNER JOIN (Laua_brand 
-    INNER JOIN (Isik 
+  INNER JOIN (Laua_brand
+    INNER JOIN (Isik
       INNER JOIN Laud ON Isik.isik_id = Laud.registreerija_id)
     USING (laua_brand_kood))
   USING (laua_seisundi_liik_kood);
@@ -66,7 +68,6 @@ CREATE VIEW isiku_info WITH (security_barrier) AS
   FROM
     Isik;
 
-
 CREATE VIEW tootaja_info WITH (security_barrier) AS
   SELECT
     Isik.isik_id,
@@ -76,7 +77,7 @@ CREATE VIEW tootaja_info WITH (security_barrier) AS
     Isik
   INNER JOIN
     Tootaja
-  ON 
+  ON
     Isik.isik_id = Tootaja.isik_id
   INNER JOIN
     Tootaja_seisundi_liik
@@ -87,9 +88,7 @@ CREATE VIEW tootaja_ametid WITH (security_barrier) AS
   SELECT
     Isik.isik_id,
     Amet.amet_kood,
-    Amet.nimetus,
-    Tootaja.mentor as mentor_id,
-    Tootaja_seisundi_liik.nimetus as staatus
+    Amet.nimetus
   FROM
     Isik
   INNER JOIN
