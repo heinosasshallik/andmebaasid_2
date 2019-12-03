@@ -16,7 +16,7 @@ WHEN (NOT
 (OLD.laua_seisundi_liik_kood=1 AND NEW.laua_seisundi_liik_kood=2) OR
 (OLD.laua_seisundi_liik_kood=2 AND NEW.laua_seisundi_liik_kood=3) OR
 (OLD.laua_seisundi_liik_kood=3 AND NEW.laua_seisundi_liik_kood=2) OR
-(OLD.laua_seisundi_liik_kood IN (2, 3) AND NEW.laua_seisundi_liik_kood=4)))
+(OLD.laua_seisundi_liik_kood  IN (2, 3) AND NEW.laua_seisundi_liik_kood=4)))
 EXECUTE PROCEDURE laud_vale_seisundiliigi_muutus(); 
 
 
