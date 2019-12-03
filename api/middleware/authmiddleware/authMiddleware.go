@@ -1,7 +1,7 @@
 package authmiddleware
 
 import (
-	"errors"
+	//"errors"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -49,10 +49,6 @@ func authenticateLogin(c *gin.Context) (interface{}, error) {
 	}
 
 	if userservice.CredentialsValid(email, password) {
-		if !isJuhataja(user) {
-			return nil, errors.New("Ainult juhatajad saavad kasutada seda rakendust.")
-		}
-		log.Println("TEST2")
 		return &usermodels.Isik{
 			Emeil:       email,
 			TootajaInfo: user.TootajaInfo,
@@ -72,7 +68,7 @@ func isJuhataja(user usermodels.Isik) bool {
 }
 
 func authorizeAccessToController(data interface{}, c *gin.Context) bool {
-	if v, ok := data.(*usermodels.Isik); ok && v.Emeil != "" {
+	if v, ok := data.(*usermodels.Isik); ok && isJuhataja(*v) {
 		return true
 	}
 
