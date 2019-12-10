@@ -63,4 +63,3 @@ $$  LANGUAGE SQL
     SET search_path = public, pg_temp;
 
 COMMENT ON FUNCTION f_lopeta_laud(p_lopetatava_laua_kood INT) IS 'Muudab laua oleku seisundi lopetatuks (OP5).';
-
