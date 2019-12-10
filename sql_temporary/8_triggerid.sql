@@ -48,7 +48,8 @@ WHEN (OLD.reg_aeg <> NEW.reg_aeg)
 EXECUTE PROCEDURE laud_reg_aeg_muutmine_keelatud();
 
 
-COMMENT ON FUNCTION laud_vale_seisundiliigi_muutus IS 'Tõstatab vale seisundiliigi muutuse puhul erindi, sest seisundiliigi muutused peavad olema kooskõlas
+COMMENT ON FUNCTION laud_vale_seisundiliigi_muutus IS 'Tõstatab vale seisundiliigi muutuse puhul erindi, 
+sest seisundiliigi muutused peavad olema kooskõlas
 laua seisundidiagrammiga'; 
 
 COMMENT ON FUNCTION laud_registreerija_muutmine_keelatud IS 'Tõstatab laua registreerija muutmise puhul erindi, sest
