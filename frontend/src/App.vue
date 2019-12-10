@@ -27,7 +27,7 @@
     </div>
 
     <div id="user-details"
-         v-if="this.$route.path !== '/' && this.jwt"
+         v-if="this.$route.path !== '/' && this.doesJwtExist()"
          class="user-details text-right pr-4">
       <UserDetails></UserDetails>
     </div>
@@ -46,7 +46,10 @@
         }
     })
     export default class App extends Vue {
-        private jwt:boolean = localStorage.getItem('JWT') !== null;
+
+        private doesJwtExist():boolean {
+            return localStorage.getItem('JWT') !== null;
+        }
 
         private logOut(): void {
             localStorage.removeItem('JWT');
