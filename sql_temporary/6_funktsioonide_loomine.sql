@@ -1,14 +1,11 @@
 /*
-Laua aktiveerimine ning deaktiveerimine.
+Laua aktiveerimine.
 
 Laused testimiseks:
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4;
 select f_aktiveeri_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
-select f_deaktiveeri_laud(4);
-select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 3
 */
-
 DROP FUNCTION IF EXISTS f_aktiveeri_laud;
 
 CREATE OR REPLACE FUNCTION f_aktiveeri_laud(p_aktiveeritava_laua_kood INT)
@@ -22,9 +19,14 @@ $$  LANGUAGE SQL
 
 COMMENT ON FUNCTION f_aktiveeri_laud(p_aktiveeritava_laua_kood INT) IS 'Muudab laua oleku seisundi aktiivseks (OP3).';
 
+/*
+Laua deaktiveerimine.
 
-
-
+Laused testimiseks:
+select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
+select f_deaktiveeri_laud(4);
+select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 3
+*/
 DROP FUNCTION IF EXISTS f_deaktiveeri_laud;
 
 CREATE OR REPLACE FUNCTION f_deaktiveeri_laud(p_deaktiveeritava_laua_kood INT)
@@ -39,8 +41,6 @@ $$  LANGUAGE SQL
     SET search_path = public, pg_temp;
 
 COMMENT ON FUNCTION f_deaktiveeri_laud(p_deaktiveeritava_laua_kood INT) IS 'Muudab laua oleku seisundi mitteaktiivseks (OP4).';
-
-
 
 /*
 Laua lõpetmaine.

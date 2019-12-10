@@ -1,7 +1,6 @@
 package authmiddleware
 
 import (
-	"errors"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -20,7 +19,7 @@ type login struct {
 var identityKey = "email"
 
 func mapDataToJwtBody(data interface{}) jwt.MapClaims {
-	if v, ok := data.(*usermodels.Isik); ok {
+	if v, ok := data.(*usermodels.Tootaja); ok {
 		return jwt.MapClaims{
 			identityKey: v.Emeil,
 		}
@@ -30,7 +29,7 @@ func mapDataToJwtBody(data interface{}) jwt.MapClaims {
 
 func extractDataFromJwt(c *gin.Context) interface{} {
 	claims := jwt.ExtractClaims(c)
-	return &usermodels.Isik{
+	return &usermodels.Tootaja{
 		Emeil: claims[identityKey].(string),
 	}
 }
@@ -43,36 +42,19 @@ func authenticateLogin(c *gin.Context) (interface{}, error) {
 	email := loginVals.Email
 	password := loginVals.Password
 
-	user, err := userservice.GetUserByEmail(email)
+	user, err := userservice.GetWorkerInfo(email)
 	if err != nil {
 		return nil, jwt.ErrFailedAuthentication
 	}
 
 	if userservice.CredentialsValid(email, password) {
-		if !isJuhataja(user) {
-			return nil, errors.New("Ainult juhatajad saavad kasutada seda rakendust.")
-		}
-		log.Println("TEST2")
-		return &usermodels.Isik{
-			Emeil:       email,
-			TootajaInfo: user.TootajaInfo,
-		}, nil
+		return user, nil
 	}
 	return nil, jwt.ErrFailedAuthentication
-
-}
-
-func isJuhataja(user usermodels.Isik) bool {
-	for _, job := range user.TootajaInfo.Ametid {
-		if job.AmetID == 1 {
-			return true
-		}
-	}
-	return false
 }
 
 func authorizeAccessToController(data interface{}, c *gin.Context) bool {
-	if v, ok := data.(*usermodels.Isik); ok && v.Emeil != "" {
+	if v, ok := data.(*usermodels.Tootaja); ok && v.Emeil != "" {
 		return true
 	}
 

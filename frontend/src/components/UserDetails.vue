@@ -1,6 +1,6 @@
 <template>
   <p class="pt-2" v-if="userData.Nimi">
-    Nimi: {{userData.Nimi.String}}<span class="pl-4">Amet: {{userData.TootajaInfo.Ametid[0].Amet}}</span>
+    Nimi: {{userData.Nimi.String}}<span class="pl-4">Amet: {{userData.Amet}}</span>
   </p>
 </template>
 
