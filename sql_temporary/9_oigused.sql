@@ -38,4 +38,6 @@ f_lopeta_laud(p_deaktiveeritava_laua_kood Laud.laua_kood%TYPE),
 f_on_tootaja(p_kasutajanimi text, p_parool text)
 TO t179501_juhataja;
 
-ALTER DEFAULT PRIVILEGES REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
+ALTER DEFAULT PRIVILEGES REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC; 
+
+DROP USER IF EXISTS t179501_juhataja;
