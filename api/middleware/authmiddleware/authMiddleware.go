@@ -42,13 +42,10 @@ func authenticateLogin(c *gin.Context) (interface{}, error) {
 	email := loginVals.Email
 	password := loginVals.Password
 
-	user, err := userservice.GetWorkerInfo(email)
-	if err != nil {
-		return nil, jwt.ErrFailedAuthentication
-	}
-
 	if userservice.CredentialsValid(email, password) {
-		return user, nil
+		return &usermodels.Tootaja{
+			Emeil: email,
+		}, nil
 	}
 	return nil, jwt.ErrFailedAuthentication
 }
