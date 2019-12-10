@@ -25,8 +25,10 @@ INSERT INTO Laua_kategooria (laua_kategooria_kood, nimetus, laua_kategooria_tyyp
 INSERT INTO Laua_kategooria (laua_kategooria_kood, nimetus, laua_kategooria_tyyp_kood) VALUES (5, 'Heas korras', 2);
 INSERT INTO Laua_kategooria (laua_kategooria_kood, nimetus, laua_kategooria_tyyp_kood) VALUES (6, 'Vajab lähiajal hooldust', 2);
 
-INSERT INTO Amet (amet_kood, nimetus, kirjeldus) VALUES (1, 'Juhataja', 'Vastutab eelarve ja arendustöö eest. Saab vaadata laudade koondaruannet, lõpetada laudu ja vaadata kõiki laudu.');
-INSERT INTO Amet (amet_kood, nimetus, kirjeldus) VALUES (2, 'Laudade haldur', 'Tegemist on klienditeenindajaga. Saab laudu registreerida, unustada, aktiveerida, mitteaktiivseks muuta, vaadata.');
+INSERT INTO Amet (amet_kood, nimetus, kirjeldus) VALUES (1, 'Juhataja', 'Vastutab eelarve ja arendustöö eest. 
+Saab vaadata laudade koondaruannet, lõpetada laudu ja vaadata kõiki laudu.');
+INSERT INTO Amet (amet_kood, nimetus, kirjeldus) VALUES (2, 'Laudade haldur', 'Tegemist on klienditeenindajaga. 
+Saab laudu registreerida, unustada, aktiveerida, mitteaktiivseks muuta, vaadata.');
 
 INSERT INTO Riik (riik_kood, nimetus) VALUES ('ENG', 'Inglismaa');
 INSERT INTO Riik (riik_kood, nimetus) VALUES ('EST', 'Eesti');
@@ -41,7 +43,8 @@ INSERT INTO Tootaja_seisundi_liik (tootaja_seisundi_liik_kood, nimetus) VALUES (
 INSERT INTO Tootaja_seisundi_liik (tootaja_seisundi_liik_kood, nimetus) VALUES (5, 'Töösuhe peataud');
 
 INSERT INTO Isik (isikukood, riik_kood, e_meil, parool, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht) 
-VALUES ('3975163289', 'EST', 'piotr1@gmail.com', 'tere', 1, '1995-04-20 00:00:00', '2019-04-11 16:21:15', 'Peeter', 'Esimene', 'Raja 18');
+VALUES ('3975163289', 'EST', 'piotr1@gmail.com', 'tere', 1, '1995-04-20 00:00:00', 
+'2019-04-11 16:21:15', 'Peeter', 'Esimene', 'Raja 18');
 
 INSERT INTO Isik (isikukood, riik_kood, e_meil, parool, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht)
 VALUES ('36498152648', 'RUS', 'maie@valdur.ee', 'olen', 1, '1976-09-15 00:00:00', '2019-04-11 16:21:21', 'Maie', 'Valdur', 'Vene 6');
@@ -57,16 +60,20 @@ INSERT INTO Klient (isik_id, on_nous_tylitamisega, kliendi_seisundi_liik_kood) V
 INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (2, 1, 1, NULL); 
 INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (3, 2, 2, 2); 
 
-INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, reg_aeg, kommentaar)
+INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, 
+reg_aeg, kommentaar)
 VALUES (1, 153, 2, 2, 4, 1, '2019-03-29 16:16:02', NULL );
 
-INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, reg_aeg, kommentaar)
+INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, 
+reg_aeg, kommentaar)
 VALUES (2, 153, 2, 2, 1, 1, '2019-03-29 16:24:31', NULL );
 
-INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, reg_aeg, kommentaar)
+INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, 
+reg_aeg, kommentaar)
 VALUES (3, 153, 2, 2, 2, 1, '2019-03-29 16:26:00', NULL );
 
-INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, reg_aeg, kommentaar)
+INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, 
+reg_aeg, kommentaar)
 VALUES (4, 76, 4, 3, 2, 2, '2019-04-10 12:01:32', 'See laud läks katki ja tehti ise korda. Ei vasta võistlusnõuetele.' );
 
 INSERT INTO Laua_kategooria_omamine (laua_kood, laua_kategooria_kood) VALUES (1, 1);

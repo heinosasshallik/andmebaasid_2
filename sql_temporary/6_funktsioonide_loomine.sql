@@ -9,7 +9,11 @@ select f_deaktiveeri_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 3
 */
 
-DROP FUNCTION IF EXISTS f_aktiveeri_laud;
+DROP FUNCTION IF EXISTS f_aktiveeri_laud; 
+
+DROP FUNCTION IF EXISTS f_deaktiveeri_laud;
+
+DROP FUNCTION IF EXISTS f_lopeta_laud;
 
 CREATE OR REPLACE FUNCTION f_aktiveeri_laud(p_aktiveeritava_laua_kood INT)
 RETURNS VOID AS $$
@@ -22,10 +26,6 @@ $$  LANGUAGE SQL
 
 COMMENT ON FUNCTION f_aktiveeri_laud(p_aktiveeritava_laua_kood INT) IS 'Muudab laua oleku seisundi aktiivseks (OP3).';
 
-
-
-
-DROP FUNCTION IF EXISTS f_deaktiveeri_laud;
 
 CREATE OR REPLACE FUNCTION f_deaktiveeri_laud(p_deaktiveeritava_laua_kood INT)
 RETURNS VOID AS $$
@@ -41,7 +41,6 @@ $$  LANGUAGE SQL
 COMMENT ON FUNCTION f_deaktiveeri_laud(p_deaktiveeritava_laua_kood INT) IS 'Muudab laua oleku seisundi mitteaktiivseks (OP4).';
 
 
-
 /*
 Laua lõpetmaine.
 
@@ -50,7 +49,6 @@ select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood o
 select f_lopeta_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 4
 */
-DROP FUNCTION IF EXISTS f_lopeta_laud;
 
 CREATE OR REPLACE FUNCTION f_lopeta_laud(p_lopetatava_laua_kood INT)
 RETURNS VOID AS $$

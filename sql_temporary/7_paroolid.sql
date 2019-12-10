@@ -36,3 +36,6 @@ tõstutundetu kasutajanimi ja p_parool oodatav väärtus on
 tõstutundlik avatekstiline parool. Töötajal on õigus
 süsteemi siseneda, vaid siis kui tema seisundiks on tööl, puhkusel
 või haiguslehel.';
+
+                                        
+DROP EXTENSION IF EXISTS pgcrypto CASCADE;
