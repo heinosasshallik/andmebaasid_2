@@ -18,5 +18,7 @@ synni_kp, eesnimi, perenimi, elukoht)
         jsonb_array_elements(isik->'isikud')->>'perekonnanimi' AS perenimi,  
         jsonb_array_elements(isik->'isikud')->>'aadress' AS elukoht
         FROM isik_jsonb) AS lahteandmed
-    WHERE isiku_seisundi_liik_kood::smallint=1;
+    WHERE isiku_seisundi_liik_kood::smallint=1; 
+    
+    DROP EXTENSION IF EXISTS postgres_fdw CASCADE;
  
