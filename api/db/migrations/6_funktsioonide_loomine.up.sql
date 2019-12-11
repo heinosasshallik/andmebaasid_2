@@ -129,14 +129,12 @@ $$  LANGUAGE SQL
     SECURITY DEFINER
     SET search_path = public, pg_temp;
 
-COMMENT ON FUNCTION f_eemalda_laud_kategooriast(p_laua_kood INT, p_kategooria_kood INT) IS 'Eemaldab laua kategooriast (OP8). Laud peab olema kas ootel või mitteaktiivne.';
+COMMENT ON FUNCTION f_eemalda_laud_kategooriast(p_laua_kood INT, p_kategooria_kood INT)
+IS 'Eemaldab laua kategooriast (OP8). Laud peab olema kas ootel või mitteaktiivne.';
 
 /*
 Unusta laud.
-
 */
-
-
 DROP FUNCTION IF EXISTS f_unusta_laud;
 
 CREATE OR REPLACE FUNCTION f_unusta_laud(p_laua_kood INT)
