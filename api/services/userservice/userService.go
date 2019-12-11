@@ -11,7 +11,7 @@ import (
 func CredentialsValid(email string, password string) bool {
 	var result bool
 	db := db.GetDB()
-	row := db.QueryRow("select f_on_tootaja($1, $2)", email, password)
+	row := db.QueryRow("select f_on_juhataja($1, $2)", email, password)
 	err := row.Scan(&result)
 	if err != nil {
 		log.Println(err)

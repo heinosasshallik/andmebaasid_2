@@ -1,3 +1,4 @@
+DROP USER IF EXISTS t179501_juhataja;
 CREATE USER t179501_juhataja WITH PASSWORD 'erandlikultTugevParool';
 
 REVOKE CONNECT, TEMP ON DATABASE t179501 FROM PUBLIC;
@@ -12,7 +13,7 @@ REVOKE EXECUTE ON FUNCTION
 f_aktiveeri_laud(p_aktiveeritava_laua_kood Laud.laua_kood%TYPE),
 f_deaktiveeri_laud(p_deaktiveeritava_laua_kood Laud.laua_kood%TYPE),
 f_lopeta_laud(p_deaktiveeritava_laua_kood Laud.laua_kood%TYPE),
-f_on_tootaja(p_kasutajanimi text, p_parool text)
+f_on_juhataja(p_kasutajanimi text, p_parool text)
 FROM PUBLIC;
 
 REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM PUBLIC;
@@ -35,7 +36,7 @@ TO t179501_juhataja;
 
 GRANT EXECUTE ON FUNCTION
 f_lopeta_laud(p_deaktiveeritava_laua_kood Laud.laua_kood%TYPE),
-f_on_tootaja(p_kasutajanimi text, p_parool text)
+f_on_juhataja(p_kasutajanimi text, p_parool text)
 TO t179501_juhataja;
 
 ALTER DEFAULT PRIVILEGES REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC; 
