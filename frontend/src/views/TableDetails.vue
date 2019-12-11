@@ -38,7 +38,7 @@
 
       <!--   THIS IS FOR WHEN TABLE HAS NO CATEGORIES   -->
       <b-row class="mb-1"
-             v-if="categoriesData && !categoriesData.length">
+             v-if="!categoriesData || (categoriesData && !categoriesData.length)">
         <b-col cols="4" class="text-right pt-2">Laua kategooriad</b-col>
         <b-col cols="8" class="text-left">
           <b-form-input :readonly=true></b-form-input>

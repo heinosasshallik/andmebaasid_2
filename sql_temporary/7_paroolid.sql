@@ -1,14 +1,11 @@
 UPDATE isik
 SET parool=public.crypt(parool,public.gen_salt('bf', 11));
 
-
 ALTER TABLE isik
 DROP CONSTRAINT ak_isik_e_meil;
 
 CREATE UNIQUE INDEX ak_isik_e_meil 
 ON isik (UPPER(e_meil));
-
-
 
 DROP FUNCTION IF EXISTS f_on_tootaja;
 
@@ -21,7 +18,7 @@ SELECT INTO rslt (parool = public.crypt(p_parool,parool))
 FROM Tootaja 
 INNER JOIN Isik ON Isik.isik_id = Tootaja.isik_id
 WHERE Upper(e_meil)=Upper(p_e_meil) 
-AND amet_kood BETWEEN 1 AND 2 
+AND amet_kood = 1
 AND tootaja_seisundi_liik_kood IN (1, 2, 3)
 AND isiku_seisundi_liik_kood = 1;
 RETURN coalesce(rslt, FALSE);
@@ -35,7 +32,6 @@ töötajat. Parameetri p_e_meil oodatav väärtus on
 tõstutundetu kasutajanimi ja p_parool oodatav väärtus on
 tõstutundlik avatekstiline parool. Töötajal on õigus
 süsteemi siseneda, vaid siis kui tema seisundiks on tööl, puhkusel
-või haiguslehel.';
-
-                                        
-DROP EXTENSION IF EXISTS pgcrypto CASCADE;
+või haiguslehel. Isiku seisundi liik peab olema elus.
+Realiseeritud on vaid juhataja töökoht, seega lubatakse hetkel süsteemi
+siseneda vaid juhataja ametikoodiga isikuid';

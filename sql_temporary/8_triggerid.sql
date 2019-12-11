@@ -48,21 +48,25 @@ WHEN (OLD.reg_aeg <> NEW.reg_aeg)
 EXECUTE PROCEDURE laud_reg_aeg_muutmine_keelatud();
 
 
-COMMENT ON FUNCTION laud_vale_seisundiliigi_muutus IS 'Tõstatab vale seisundiliigi muutuse puhul erindi, 
+COMMENT ON FUNCTION laud_vale_seisundiliigi_muutus
+IS 'Tõstatab vale seisundiliigi muutuse puhul erindi,
 sest seisundiliigi muutused peavad olema kooskõlas
 laua seisundidiagrammiga'; 
 
-COMMENT ON FUNCTION laud_registreerija_muutmine_keelatud IS 'Tõstatab laua registreerija muutmise puhul erindi, sest
+COMMENT ON FUNCTION laud_registreerija_muutmine_keelatud
+IS 'Tõstatab laua registreerija muutmise puhul erindi, sest
 registreerijat ei tohiks saada muuta.';
 
-COMMENT ON FUNCTION laud_reg_aeg_muutmine_keelatud IS 'Tõstatab laua registreerimisaja muutmise puhul erindi, sest laual 
+COMMENT ON FUNCTION laud_reg_aeg_muutmine_keelatud
+IS 'Tõstatab laua registreerimisaja muutmise puhul erindi, sest laual
 saab olla ainult üks registreermisaeg.'; 
 
-COMMENT ON TRIGGER laud_vale_seisundiliigi_muutus ON laud IS 'Keelab teha laua seisundiliigi muutusi, 
-mis lähevad vastuollu andmebaasioperatsioonidega'; 
+COMMENT ON TRIGGER laud_vale_seisundiliigi_muutus ON laud
+IS 'Keelab teha laua seisundiliigi muutusi,
+mis lähevad vastuollu andmebaasioperatsioonidega.';
 
-COMMENT ON TRIGGER laud_registreerija_muutmine_keelatud ON 
-laud IS 'Keelab muuta laua tabelis olevate laudade registreerija id-d'; 
+COMMENT ON TRIGGER laud_registreerija_muutmine_keelatud ON laud
+IS 'Keelab muuta laua tabelis olevate laudade registreerija id-d.';
 
-COMMENT ON TRIGGER laud_reg_aeg_muutmine_keelatud ON 
-laud IS 'Keelab muuta laua tabelis olevate laudade registreermis aegu';
+COMMENT ON TRIGGER laud_reg_aeg_muutmine_keelatud ON laud
+IS 'Keelab muuta laua tabelis olevate laudade registreermisaegu.';
