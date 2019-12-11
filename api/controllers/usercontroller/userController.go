@@ -11,7 +11,7 @@ import (
 func GetUserInfo(c *gin.Context) {
 	claims := jwt.ExtractClaims(c)
 	email := claims["email"].(string)
-	user, err := userservice.GetUserByEmail(email)
+	user, err := userservice.GetWorkerInfo(email)
 	if err != nil {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)
