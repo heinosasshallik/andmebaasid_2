@@ -51,6 +51,8 @@ DROP FUNCTION IF EXISTS f_lisa_laud_kategooriasse;
 
 CREATE OR REPLACE FUNCTION f_lisa_laud_kategooriasse(p_laua_kood INT, p_kategooria_kood INT)
 RETURNS VOID AS $$
+  LOCK TABLE laud;
+  LOCK TABLE laua_kategooria;
   INSERT INTO laua_kategooria_omamine (
     laua_kood,
     laua_kategooria_kood
@@ -98,6 +100,9 @@ DROP FUNCTION IF EXISTS f_eemalda_laud_kategooriast;
 
 CREATE OR REPLACE FUNCTION f_eemalda_laud_kategooriast(p_laua_kood INT, p_kategooria_kood INT)
 RETURNS VOID AS $$
+  LOCK TABLE laud;
+  LOCK TABLE laua_kategooria;
+
   DELETE FROM
     laua_kategooria_omamine
   WHERE
