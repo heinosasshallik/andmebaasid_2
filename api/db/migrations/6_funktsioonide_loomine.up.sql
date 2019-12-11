@@ -1,14 +1,11 @@
 /*
-Laua aktiveerimine ning deaktiveerimine.
+Laua aktiveerimine.
 
 Laused testimiseks:
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4;
 select f_aktiveeri_laud(4);
 select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
-select f_deaktiveeri_laud(4);
-select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 3
 */
-
 DROP FUNCTION IF EXISTS f_aktiveeri_laud;
 
 CREATE OR REPLACE FUNCTION f_aktiveeri_laud(p_aktiveeritava_laua_kood INT)
@@ -22,9 +19,14 @@ $$  LANGUAGE SQL
 
 COMMENT ON FUNCTION f_aktiveeri_laud(p_aktiveeritava_laua_kood INT) IS 'Muudab laua oleku seisundi aktiivseks (OP3).';
 
+/*
+Laua deaktiveerimine.
 
-
-
+Laused testimiseks:
+select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 2
+select f_deaktiveeri_laud(4);
+select laua_kood, laua_seisundi_liik_kood from laud where laua_kood=4; -- kood on 3
+*/
 DROP FUNCTION IF EXISTS f_deaktiveeri_laud;
 
 CREATE OR REPLACE FUNCTION f_deaktiveeri_laud(p_deaktiveeritava_laua_kood INT)
@@ -60,7 +62,7 @@ RETURNS VOID AS $$
     p_kategooria_kood
   WHERE
     EXISTS (
-      SELECT laua_kood 
+      SELECT laua_kood
       FROM laud
       WHERE laua_kood = p_laua_kood
     ) AND
@@ -104,7 +106,7 @@ RETURNS VOID AS $$
     laua_kood = p_laua_kood AND
     laua_kategooria_kood = p_kategooria_kood AND
     EXISTS (
-      SELECT laua_kood 
+      SELECT laua_kood
       FROM laud
       WHERE laua_kood = p_laua_kood
     ) AND
@@ -127,14 +129,12 @@ $$  LANGUAGE SQL
     SECURITY DEFINER
     SET search_path = public, pg_temp;
 
-COMMENT ON FUNCTION f_eemalda_laud_kategooriast(p_laua_kood INT, p_kategooria_kood INT) IS 'Eemaldab laua kategooriast (OP8). Laud peab olema kas ootel või mitteaktiivne.';
+COMMENT ON FUNCTION f_eemalda_laud_kategooriast(p_laua_kood INT, p_kategooria_kood INT)
+IS 'Eemaldab laua kategooriast (OP8). Laud peab olema kas ootel või mitteaktiivne.';
 
 /*
 Unusta laud.
-
 */
-
-
 DROP FUNCTION IF EXISTS f_unusta_laud;
 
 CREATE OR REPLACE FUNCTION f_unusta_laud(p_laua_kood INT)
@@ -171,4 +171,3 @@ $$  LANGUAGE SQL
     SET search_path = public, pg_temp;
 
 COMMENT ON FUNCTION f_lopeta_laud(p_lopetatava_laua_kood INT) IS 'Muudab laua oleku seisundi lopetatuks (OP5).';
-

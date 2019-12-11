@@ -5,7 +5,13 @@ import (
 )
 
 type Tootaja struct {
-	Staatus  string
-	MentorID sql.NullInt32
-	Ametid   []Amet
+	IsikID    int
+	Isikukood string
+	RiikKood  string
+	Emeil     string
+	Nimi      sql.NullString
+	MentorID  sql.NullInt32
+	Staatus   string
+	AmetID    int
+	Amet      string
 }

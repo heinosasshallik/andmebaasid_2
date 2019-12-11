@@ -25,13 +25,11 @@ GRANT USAGE ON SCHEMA public TO t179501_juhataja;
 
 GRANT SELECT ON
 aktiivsed_mitteaktiivsed_lauad,
-isiku_info,
+tootajate_detailid,
 koik_lauad,
 laua_detailid,
 laua_kategooriate_omamine,
-laudade_koondaruanne,
-tootaja_ametid,
-tootaja_info
+laudade_koondaruanne
 TO t179501_juhataja;
 
 GRANT EXECUTE ON FUNCTION
