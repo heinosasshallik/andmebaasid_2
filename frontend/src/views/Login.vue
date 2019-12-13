@@ -31,7 +31,7 @@
               </b-form-input>
             </b-form-group>
 
-            <b-button type="submit" variant="primary">Log In</b-button>
+            <b-button type="submit" variant="primary">Logi sisse</b-button>
           </b-form>
 
         </b-col>
@@ -59,8 +59,7 @@
                         localStorage.setItem('JWT', 'Bearer ' + json.token);
                         this.$router.push({path: 'all_tables'});
                     } else {
-                        // todo: better error handling
-                        alert(json.message);
+                        alert("Vale kasutajanimi või parool!");
                     }
                 });
         }
