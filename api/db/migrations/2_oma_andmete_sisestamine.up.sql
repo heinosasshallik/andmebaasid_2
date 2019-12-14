@@ -1,5 +1,3 @@
-START TRANSACTION;
-
 INSERT INTO Isiku_seisundi_liik (isiku_seisundi_liik_kood, nimetus) VALUES (1, 'Elus');
 INSERT INTO Isiku_seisundi_liik (isiku_seisundi_liik_kood, nimetus) VALUES (2, 'Surnud'); 
 
@@ -47,6 +45,9 @@ INSERT INTO Isik (isikukood, riik_kood, e_meil, parool, isiku_seisundi_liik_kood
 VALUES ('36498152648', 'RUS', 'maie@valdur.ee', 'olen', 1, '1976-09-15 00:00:00', '2019-04-11 16:21:21', 'Maie', 'Valdur', 'Vene 6');
 
 INSERT INTO Isik (isikukood, riik_kood, e_meil, parool, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht)
+VALUES ('46498452648', 'EST', 'maali.m@gmail.com', 'maasikas', 1, '1976-09-15 00:00:00', '2019-04-11 16:21:21', 'Maali', 'Maasikas', 'Vene 8, Tallinn');
+
+INSERT INTO Isik (isikukood, riik_kood, e_meil, parool, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht)
 VALUES ('5656566556', 'LAT', 'sadasd@asdas.ee', 'nõrk', 1, '1959-02-05 00:00:00', '2019-04-18 18:54:27', 'Valdur', 'Teine', 'Paala 3');
 
 INSERT INTO Isik (isikukood, riik_kood, e_meil, parool, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht)
@@ -54,8 +55,9 @@ VALUES ('5996865863', 'EST', 'rambo@mambo.ee', 'parool', 2, '1910-02-05 00:00:00
 
 INSERT INTO Klient (isik_id, on_nous_tylitamisega, kliendi_seisundi_liik_kood) VALUES (1, false, 1);
 
-INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (2, 1, 1, NULL); 
-INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (3, 2, 2, 2); 
+INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (2, 1, 1, NULL);
+INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (3, 1, 1, NULL);
+INSERT INTO Tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (4, 2, 2, 2);
 
 INSERT INTO Laud (laua_kood, laua_vorgu_korgus, max_mangijate_arv, registreerija_id, laua_seisundi_liik_kood, laua_brand_kood, reg_aeg, kommentaar)
 VALUES (1, 153, 2, 2, 4, 1, '2019-03-29 16:16:02', NULL );
@@ -79,5 +81,3 @@ INSERT INTO Laua_kategooria_omamine (laua_kood, laua_kategooria_kood) VALUES (2,
 INSERT INTO Laua_kategooria_omamine (laua_kood, laua_kategooria_kood) VALUES (3, 1);
 INSERT INTO Laua_kategooria_omamine (laua_kood, laua_kategooria_kood) VALUES (3, 4);
 INSERT INTO Laua_kategooria_omamine (laua_kood, laua_kategooria_kood) VALUES (3, 6);
-
-COMMIT;

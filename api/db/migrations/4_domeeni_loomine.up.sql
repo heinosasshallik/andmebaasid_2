@@ -1,7 +1,4 @@
-START TRANSACTION;
-
-DROP DOMAIN IF EXISTS d_nimetus;
-CREATE DOMAIN d_nimetus VARCHAR(50) NOT NULL 
+CREATE DOMAIN d_nimetus VARCHAR(50) NOT NULL
 CONSTRAINT chk_nimetus_ei_ole_tyhi_ei_koosne_tyhikutest CHECK (VALUE!~'^[[:space:]]*$');
 
 ALTER TABLE Amet DROP CONSTRAINT CHK_Amet_nimetus_ei_koosne_tyhikutest_pole_tyhi;
@@ -33,5 +30,3 @@ ALTER TABLE Laua_seisundi_liik ALTER COLUMN nimetus TYPE d_nimetus;
 ALTER TABLE Isiku_seisundi_liik ALTER COLUMN nimetus TYPE d_nimetus;
 ALTER TABLE Tootaja_seisundi_liik ALTER COLUMN nimetus TYPE d_nimetus;
 ALTER TABLE Kliendi_seisundi_liik ALTER COLUMN nimetus TYPE d_nimetus;
-
-COMMIT;

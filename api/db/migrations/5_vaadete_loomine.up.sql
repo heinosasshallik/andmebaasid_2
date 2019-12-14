@@ -1,31 +1,23 @@
-START TRANSACTION;
-
-DROP VIEW IF EXISTS laudade_koondaruanne;
-DROP VIEW IF EXISTS laua_kategooriate_omamine;
-DROP VIEW IF EXISTS koik_lauad;
-DROP VIEW IF EXISTS aktiivsed_mitteaktiivsed_lauad;
-DROP VIEW IF EXISTS laua_detailid;
-DROP VIEW IF EXISTS tootajate_detailid;
-
 CREATE VIEW laudade_koondaruanne WITH (security_barrier) AS (
-    SELECT  Laua_seisundi_liik.laua_seisundi_liik_kood AS laua_seisundi_liik_kood,
-            UPPER(Laua_seisundi_liik.nimetus) AS staatus,
-            COUNT(Laud.laua_kood) AS kogus
-        FROM Laua_seisundi_liik
-        LEFT JOIN Laud USING (laua_seisundi_liik_kood)
-        GROUP BY Laua_seisundi_liik.laua_seisundi_liik_kood, Laua_seisundi_liik.nimetus
-        ORDER BY COUNT(Laud.laua_kood) DESC, UPPER(Laua_seisundi_liik.nimetus)
-    );
+  SELECT  Laua_seisundi_liik.laua_seisundi_liik_kood AS laua_seisundi_liik_kood,
+      UPPER(Laua_seisundi_liik.nimetus) AS staatus,
+      COUNT(Laud.laua_kood) AS kogus
+    FROM Laua_seisundi_liik
+    LEFT JOIN Laud USING (laua_seisundi_liik_kood)
+    GROUP BY Laua_seisundi_liik.laua_seisundi_liik_kood,
+             Laua_seisundi_liik.nimetus
+    ORDER BY COUNT(Laud.laua_kood) DESC, UPPER(Laua_seisundi_liik.nimetus)
+);
 
 CREATE VIEW laua_kategooriate_omamine WITH (security_barrier) AS (
-    SELECT  Laua_kategooria_omamine.laua_kood,
-            Laua_kategooria.nimetus || '(' || Laua_kategooria_tyyp.nimetus || ')' AS kategooria
-        FROM Laua_kategooria_tyyp
-        INNER JOIN (Laua_kategooria
-                    INNER JOIN Laua_kategooria_omamine
-                    USING (laua_kategooria_kood))
-        USING (laua_kategooria_tyyp_kood)
-    );
+  SELECT  Laua_kategooria_omamine.laua_kood,
+        Laua_kategooria.nimetus || '(' || Laua_kategooria_tyyp.nimetus || ')' AS kategooria
+    FROM Laua_kategooria_tyyp
+    INNER JOIN (Laua_kategooria
+                INNER JOIN Laua_kategooria_omamine
+                USING (laua_kategooria_kood))
+    USING (laua_kategooria_tyyp_kood)
+  );
 
 CREATE VIEW koik_lauad WITH (security_barrier) AS
   SELECT L.laua_kood, L.kommentaar, LSS.nimetus as staatus
@@ -85,14 +77,13 @@ laudade arv, siis need on sorteeritud suurtähtedega nime järgi tähestiku jär
 COMMENT ON VIEW laua_kategooriate_omamine
 IS 'Kuvab lauad ja nendega seotud kategooriad ning kategooriate tüüpide nimetused.';
 COMMENT ON VIEW koik_lauad
-IS 'Kuvab laua koodi, kommentaari ja staatuse iga laua kohta.';
+IS 'Kuvab laua koodi, kommentaari ja staatuse iga laua kohta.
+Seda vaadet on vaja, et anda lühiülevaade laudadest.';
 COMMENT ON VIEW aktiivsed_mitteaktiivsed_lauad
 IS 'Kuvab aktiivses või mitteaktiivses seisundis laudade nimekirja,
 kus on kood, hetkeseisundi nimetus ja kommentaar.';
 COMMENT ON VIEW laua_detailid
 IS 'Annab detailse ülevaate laua andmete, seisundi ning laua registreerija kohta.';
 COMMENT ON VIEW tootajate_detailid
-IS 'Tagastab detailse info töötajate kohta.';
-
-
-COMMIT;
+IS 'Tagastab detailse info töötajate kohta ilma konfidentsiaalsete andmeteta.
+Seda vaadet kasutatakse, et kasutajale tema enda kohta infot näidata.';

@@ -1,33 +1,3 @@
-START TRANSACTION;
-
-DROP TABLE IF EXISTS Amet CASCADE;
-
-DROP TABLE IF EXISTS Isiku_seisundi_liik CASCADE;
-
-DROP TABLE IF EXISTS Laua_brand CASCADE;
-
-DROP TABLE IF EXISTS Laua_kategooria CASCADE;
-
-DROP TABLE IF EXISTS Laua_kategooria_tyyp CASCADE;
-
-DROP TABLE IF EXISTS Laua_seisundi_liik CASCADE;
-
-DROP TABLE IF EXISTS Tootaja_seisundi_liik CASCADE;
-
-DROP TABLE IF EXISTS Kliendi_seisundi_liik CASCADE;
-
-DROP TABLE IF EXISTS Riik CASCADE;
-
-DROP TABLE IF EXISTS Isik CASCADE;
-
-DROP TABLE IF EXISTS Klient CASCADE;
-
-DROP TABLE IF EXISTS Tootaja CASCADE;
-
-DROP TABLE IF EXISTS Laud CASCADE;
-
-DROP TABLE IF EXISTS Laua_kategooria_omamine CASCADE;
-
 CREATE TABLE Amet (
 	amet_kood smallint NOT NULL,
 	nimetus varchar(50) NOT NULL,
@@ -188,25 +158,13 @@ CREATE TABLE Laua_kategooria_omamine (
 );
 
 CREATE INDEX IXFK_Laua_kategooria_Laua_kategooria_tyyp ON Laua_kategooria (laua_kategooria_tyyp_kood ASC);
-
 CREATE INDEX IXFK_Isik_Isiku_seisundi_liik ON Isik (isiku_seisundi_liik_kood ASC);
-
 CREATE INDEX IXFK_Isik_riik ON Isik (riik_kood ASC);
-
 CREATE INDEX IXFK_Klient_Kliendi_seisundi_liik ON Klient (kliendi_seisundi_liik_kood ASC);
-
 CREATE INDEX IXFK_Tootaja_mentor ON Tootaja (mentor ASC);
-
 CREATE INDEX IXFK_Tootaja_Amet ON Tootaja (amet_kood ASC);
-
 CREATE INDEX IXFK_Tootaja_Tootaja_seisundi_liik ON Tootaja (tootaja_seisundi_liik_kood ASC);
-
 CREATE INDEX IXFK_Laud_Laua_brand ON Laud (laua_brand_kood ASC);
-
 CREATE INDEX IXFK_Laud_Tootaja ON Laud (registreerija_id ASC);
-
 CREATE INDEX IXFK_Laud_Laua_seisundi_liik ON Laud (laua_seisundi_liik_kood ASC);
-
 CREATE INDEX IXFK_Laua_kategooria_omamine_Laua_kategooria ON Laua_kategooria_omamine (laua_kategooria_kood ASC);
-
-COMMIT;

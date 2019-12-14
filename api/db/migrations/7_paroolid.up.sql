@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
 UPDATE isik
 SET parool=public.crypt(parool,public.gen_salt('bf', 11));
 
@@ -6,8 +8,6 @@ DROP CONSTRAINT ak_isik_e_meil;
 
 CREATE UNIQUE INDEX ak_isik_e_meil
 ON isik (UPPER(e_meil));
-
-DROP FUNCTION IF EXISTS f_on_juhataja;
 
 CREATE OR REPLACE FUNCTION f_on_juhataja(p_e_meil text, p_parool text)
 RETURNS boolean AS
@@ -26,7 +26,7 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER STABLE
 SET search_path = public, pg_temp;
 
-COMMENT ON FUNCTION f_on_juhataja(p_kasutajanimi text, p_parool text)
+COMMENT ON FUNCTION f_on_juhataja(p_e_meil text, p_parool text)
 IS 'Selle funktsiooni abil autenditakse
 juhatajat. Parameetri p_e_meil oodatav väärtus on
 tõstutundetu kasutajanimi ja p_parool oodatav väärtus on
