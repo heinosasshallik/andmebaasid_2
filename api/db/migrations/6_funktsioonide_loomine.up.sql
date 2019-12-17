@@ -51,8 +51,6 @@ select f_lisa_laud_kategooriasse(2, 6)
 */
 CREATE OR REPLACE FUNCTION f_lisa_laud_kategooriasse(p_laua_kood INT, p_kategooria_kood SMALLINT)
 RETURNS VOID AS $$
-  LOCK TABLE laud;
-  LOCK TABLE laua_kategooria;
   INSERT INTO laua_kategooria_omamine (
     laua_kood,
     laua_kategooria_kood
@@ -62,16 +60,6 @@ RETURNS VOID AS $$
     p_kategooria_kood
   WHERE
     EXISTS (
-      SELECT laua_kood
-      FROM laud
-      WHERE laua_kood = p_laua_kood
-    ) AND
-    EXISTS (
-      SELECT laua_kategooria_kood
-      FROM laua_kategooria
-      WHERE laua_kategooria_kood = p_kategooria_kood
-    ) AND
-    EXISTS (
       SELECT laua_seisundi_liik_kood
       FROM laud
       WHERE
@@ -80,6 +68,7 @@ RETURNS VOID AS $$
           laua_seisundi_liik_kood = 1 OR
           laua_seisundi_liik_kood = 3
         )
+      FOR UPDATE
     );
 $$  LANGUAGE SQL
     SECURITY DEFINER
@@ -99,24 +88,11 @@ select f_eemalda_laud_kategooriast(2, 6)
 */
 CREATE OR REPLACE FUNCTION f_eemalda_laud_kategooriast(p_laua_kood INT, p_kategooria_kood SMALLINT)
 RETURNS VOID AS $$
-  LOCK TABLE laud;
-  LOCK TABLE laua_kategooria;
-
   DELETE FROM
     laua_kategooria_omamine
   WHERE
     laua_kood = p_laua_kood AND
     laua_kategooria_kood = p_kategooria_kood AND
-    EXISTS (
-      SELECT laua_kood
-      FROM laud
-      WHERE laua_kood = p_laua_kood
-    ) AND
-    EXISTS (
-      SELECT laua_kategooria_kood
-      FROM laua_kategooria
-      WHERE laua_kategooria_kood = p_kategooria_kood
-    ) AND
     EXISTS (
       SELECT laua_seisundi_liik_kood
       FROM laud
@@ -126,6 +102,7 @@ RETURNS VOID AS $$
           laua_seisundi_liik_kood = 1 OR
           laua_seisundi_liik_kood = 3
         )
+        FOR UPDATE
     );
 $$  LANGUAGE SQL
     SECURITY DEFINER
