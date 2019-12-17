@@ -38,8 +38,8 @@ CREATE VIEW laua_detailid WITH (security_barrier) AS
     Laud.kommentaar,
     Laua_seisundi_liik.nimetus AS staatus,
     Laua_brand.nimetus AS brand,
-    COALESCE(Isik.eesnimi || ' ', '') || COALESCE(Isik.perenimi, '') AS isiku_nimi,
-    Isik.e_meil AS isiku_e_meil
+    COALESCE(Isik.eesnimi || ' ', '') || COALESCE(Isik.perenimi, '') AS registreerija_nimi,
+    Isik.e_meil AS registreerija_e_meil
   FROM
     Laua_seisundi_liik
   INNER JOIN (Laua_brand

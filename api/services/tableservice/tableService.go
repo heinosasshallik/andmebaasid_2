@@ -80,8 +80,8 @@ func GetTableDetailed(id int) (tablemodels.Laud, error) {
 			kommentaar,
 			staatus,
 			brand,
-			isiku_nimi,
-			isiku_e_meil
+			registreerija_nimi,
+			registreerija_e_meil
 		from
 			laua_detailid
 		where
